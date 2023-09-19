@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147092AB4B68100A27646 /* AppDelegate.swift */; };
 		FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31470B2AB4B68100A27646 /* SceneDelegate.swift */; };
-		FC31470E2AB4B68100A27646 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31470D2AB4B68100A27646 /* ViewController.swift */; };
+		FC31470E2AB4B68100A27646 /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31470D2AB4B68100A27646 /* CheckInViewController.swift */; };
 		FC3147112AB4B68100A27646 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31470F2AB4B68100A27646 /* Main.storyboard */; };
 		FC3147132AB4B68100A27646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC3147122AB4B68100A27646 /* Assets.xcassets */; };
 		FC3147162AB4B68100A27646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC3147142AB4B68100A27646 /* LaunchScreen.storyboard */; };
@@ -19,7 +19,7 @@
 		FC3147062AB4B68100A27646 /* CheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3147092AB4B68100A27646 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC31470B2AB4B68100A27646 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FC31470D2AB4B68100A27646 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC31470D2AB4B68100A27646 /* CheckInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInViewController.swift; sourceTree = "<group>"; };
 		FC3147102AB4B68100A27646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC3147122AB4B68100A27646 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC3147152AB4B68100A27646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,15 +56,39 @@
 		FC3147082AB4B68100A27646 /* CheckIn */ = {
 			isa = PBXGroup;
 			children = (
+				FC31471D2AB82FA700A27646 /* Model */,
+				FC31471E2AB82FB200A27646 /* View */,
+				FC31471F2AB82FB900A27646 /* Controller */,
 				FC3147092AB4B68100A27646 /* AppDelegate.swift */,
 				FC31470B2AB4B68100A27646 /* SceneDelegate.swift */,
-				FC31470D2AB4B68100A27646 /* ViewController.swift */,
-				FC31470F2AB4B68100A27646 /* Main.storyboard */,
 				FC3147122AB4B68100A27646 /* Assets.xcassets */,
 				FC3147142AB4B68100A27646 /* LaunchScreen.storyboard */,
 				FC3147172AB4B68100A27646 /* Info.plist */,
 			);
 			path = CheckIn;
+			sourceTree = "<group>";
+		};
+		FC31471D2AB82FA700A27646 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FC31471E2AB82FB200A27646 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FC31470F2AB4B68100A27646 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FC31471F2AB82FB900A27646 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FC31470D2AB4B68100A27646 /* CheckInViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC31470E2AB4B68100A27646 /* ViewController.swift in Sources */,
+				FC31470E2AB4B68100A27646 /* CheckInViewController.swift in Sources */,
 				FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */,
 				FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */,
 			);
