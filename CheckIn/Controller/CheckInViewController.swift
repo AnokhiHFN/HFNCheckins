@@ -41,14 +41,27 @@ class CheckInViewController: UIViewController,UIPickerViewDataSource {
         sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
 
         guard
-          let name = infoTextField.text, !name.isEmpty
+            let info = infoTextField.text, !info.isEmpty
           else
         {
           self.startCheckIn.isEnabled = false
           return
         }
+        
+        let abhyasiManager = AbhyasiManager(info)
+        if abhyasiManager.isValidEmail(){
+            startCheckIn.isEnabled = true
+        }
+        if abhyasiManager.isValidNumber(){
+            startCheckIn.isEnabled = true
+        }
+            
+        if abhyasiManager.isValidId(){
+            startCheckIn.isEnabled = true
+        }
+            
         // enable okButton if all conditions are met
-        startCheckIn.isEnabled = true
+        
        }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
