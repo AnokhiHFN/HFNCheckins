@@ -11,23 +11,55 @@ class CheckInViewController: UIViewController,UIPickerViewDataSource {
     
     let batchManager = BatchManager()
     
-    @IBOutlet weak var StartCheckIn: UIButton!
+    
+
+    @IBOutlet weak var startCheckIn: UIButton!
     
     @IBOutlet weak var infoTextField: UITextField!
     
     @IBOutlet weak var batchPicker: UIPickerView!
     
-    @IBOutlet weak var ScanClicked: UIButton!
+
+
+    @IBOutlet weak var scan: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAddTargetIsNotEmptyTextFields()
         batchPicker.dataSource = self
         batchPicker.delegate = self
     }
     
+    func setupAddTargetIsNotEmptyTextFields() {
+        startCheckIn.isEnabled = false //hidden okButton
+        infoTextField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
+                                    for: .editingChanged)
+       }
+    
+    @objc func textFieldsIsNotEmpty(sender: UITextField) {
+
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
+
+        guard
+          let name = infoTextField.text, !name.isEmpty
+          else
+        {
+          self.startCheckIn.isEnabled = false
+          return
+        }
+        // enable okButton if all conditions are met
+        startCheckIn.isEnabled = true
+       }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
+    
+    @IBAction func scanClicked(_ sender: Any) {
+        
+    }
+    
     
 }
 
@@ -72,10 +104,12 @@ extension CheckInViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let info = infoTextField.text{
             print(info)
+
         }
         
         infoTextField.text = ""
     }
+
 
     
     

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -29,7 +30,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXR-YA-18f">
-                                        <rect key="frame" x="0.0" y="102" width="390" height="102"/>
+                                        <rect key="frame" x="0.0" y="101.66666666666669" width="390" height="102"/>
                                     </pickerView>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mobile/Email or ID" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="H5z-Z4-mfc">
                                         <rect key="frame" x="0.0" y="203.66666666666669" width="390" height="101.66666666666669"/>
@@ -38,7 +39,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
-                                    <button autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" horizontalHuggingPriority="266" placeholderIntrinsicWidth="500" placeholderIntrinsicHeight="101.66666666666669" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPI-fg-zf9">
+                                    <button autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" horizontalHuggingPriority="266" placeholderIntrinsicWidth="500" placeholderIntrinsicHeight="101.66666666666669" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPI-fg-zf9">
                                         <rect key="frame" x="0.0" y="305.33333333333337" width="390" height="101.66666666666669"/>
                                         <color key="backgroundColor" red="0.76862752440000004" green="0.76862752440000004" blue="0.81176471709999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" red="0.83529412749999998" green="0.89019608500000003" blue="0.99215686319999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -70,6 +71,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Scan"/>
+                                <connections>
+                                    <action selector="scanClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MF1-kI-SpF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -92,6 +96,8 @@
                     <connections>
                         <outlet property="batchPicker" destination="DXR-YA-18f" id="1Pd-lH-Xwe"/>
                         <outlet property="infoTextField" destination="H5z-Z4-mfc" id="0Gm-3p-jTr"/>
+                        <outlet property="scan" destination="V5Q-5S-YLx" id="KCz-FS-RtN"/>
+                        <outlet property="startCheckIn" destination="WPI-fg-zf9" id="CnU-bW-W4E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
