@@ -11,6 +11,7 @@ class CheckInViewController: UIViewController,UIPickerViewDataSource {
     
     let batchManager = BatchManager()
     
+    
 
     @IBOutlet weak var startCheckIn: UIButton!
     
@@ -18,7 +19,9 @@ class CheckInViewController: UIViewController,UIPickerViewDataSource {
     
     @IBOutlet weak var batchPicker: UIPickerView!
     
-    @IBOutlet weak var ScanClicked: UIButton!
+
+
+    @IBOutlet weak var scan: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +54,12 @@ class CheckInViewController: UIViewController,UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
+    
+    @IBAction func scanClicked(_ sender: Any) {
+        
+    }
+    
     
 }
 
