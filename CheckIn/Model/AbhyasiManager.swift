@@ -26,10 +26,13 @@ struct AbhyasiManager{
     func isValidNumber() -> Bool {
         let phoneRegex = #"^\+91[6-9]\d{9}$"#
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-        return phoneTest.evaluate(with: info) 
+        return phoneTest.evaluate(with: info)
     }
     
     func isValidId() -> Bool {
-        return false
+        let pattern = try! NSRegularExpression(pattern: "^[A-Za-z]{6}\\d{3}|[A-Za-z]\\d{8}$", options: [])
+        let range = NSRange(location: 0, length: info.utf16.count)
+        let isValid = pattern.firstMatch(in: info, options: [], range: range) != nil
+        return isValid
     }
 }
