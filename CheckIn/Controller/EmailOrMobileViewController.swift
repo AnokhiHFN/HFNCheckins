@@ -1,12 +1,18 @@
 import SwiftUI
 
-class EmailOrMobileViewController: UIViewController {
+class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
+    func checkinButtonPressed() {
+        print("in the right method")
+        performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("hellooooo")
         
         // Create a SwiftUI view
-        let swiftUIView = SwiftUIView()
+        var swiftUIView = SwiftUIView()
+        swiftUIView.delegate = self
         
         // Embed the SwiftUI view within a UIHostingController
         let hostingController = UIHostingController(rootView: swiftUIView)

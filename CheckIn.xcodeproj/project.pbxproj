@@ -17,6 +17,7 @@
 		FC3147432ABF199A00A27646 /* AbhyasiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147422ABF199A00A27646 /* AbhyasiManager.swift */; };
 		FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147462AC41B0200A27646 /* EmailOrMobileViewController.swift */; };
 		FC3147492AC59E3700A27646 /* CheckInForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147482AC59E3700A27646 /* CheckInForm.swift */; };
+		FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147522AC6099300A27646 /* FinalScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FC3147422ABF199A00A27646 /* AbhyasiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbhyasiManager.swift; sourceTree = "<group>"; };
 		FC3147462AC41B0200A27646 /* EmailOrMobileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOrMobileViewController.swift; sourceTree = "<group>"; };
 		FC3147482AC59E3700A27646 /* CheckInForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInForm.swift; sourceTree = "<group>"; };
+		FC3147522AC6099300A27646 /* FinalScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				FC31470D2AB4B68100A27646 /* CheckInViewController.swift */,
 				FC3147462AC41B0200A27646 /* EmailOrMobileViewController.swift */,
+				FC3147522AC6099300A27646 /* FinalScreenViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				FC31470E2AB4B68100A27646 /* CheckInViewController.swift in Sources */,
 				FC3147432ABF199A00A27646 /* AbhyasiManager.swift in Sources */,
 				FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */,
+				FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */,
 				FC3147212ABB0BC200A27646 /* BatchManager.swift in Sources */,
 				FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */,
 				FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */,

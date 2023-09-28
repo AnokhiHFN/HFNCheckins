@@ -1,6 +1,11 @@
 import SwiftUI
 
+protocol CheckInFormDelegate: AnyObject {
+    func checkinButtonPressed()
+}
+
 struct SwiftUIView: View {
+    weak var delegate: CheckInFormDelegate?
     @State private var batch = ""
     @State private var fullName = ""
     @State private var selectedAgeRange = 0
@@ -97,6 +102,7 @@ struct SwiftUIView: View {
                             Button(action: {
                                 // Add check-in button action here
                                 print("Check-in")
+                                delegate?.checkinButtonPressed()
                             }){
                                 Text("Check-in")
                                     .frame(maxWidth: .infinity)
@@ -106,8 +112,7 @@ struct SwiftUIView: View {
                                     .cornerRadius(10)
 
                                 
-                            }.disabled(true)
-                                .opacity(0.5)
+                            }
                         }
                     }
                 }
