@@ -96,6 +96,7 @@ extension CheckInViewController: UITextFieldDelegate{
     @IBAction func StartCheckInPressed(_ sender: UIButton) {
         infoTextField.endEditing(true)
         print(infoTextField.text!)
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
