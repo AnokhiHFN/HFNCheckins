@@ -79,13 +79,15 @@ struct SwiftUIView: View {
                             Button(action: {
                                 // Add cancel button action here
                                 print("Cancel")
-                            }) {
+                            }){
                                 Text("Cancel")
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .background(Color("buttonColor"))
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
+                                    
+
                             }
                         }
                     }
@@ -95,14 +97,17 @@ struct SwiftUIView: View {
                             Button(action: {
                                 // Add check-in button action here
                                 print("Check-in")
-                            }) {
+                            }){
                                 Text("Check-in")
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .background(Color("buttonColor"))
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
-                            }
+
+                                
+                            }.disabled(true)
+                                .opacity(0.5)
                         }
                     }
                 }
