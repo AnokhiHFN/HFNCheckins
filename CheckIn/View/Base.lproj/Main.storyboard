@@ -25,6 +25,7 @@
                                 <subviews>
                                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="68th Birthday Celebration of Pujya Daaji Maharaj" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XL-8u-5vU">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="101.66666666666667"/>
+                                        <color key="backgroundColor" red="0.83529412749999998" green="0.89019608500000003" blue="0.99215686319999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -32,7 +33,7 @@
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXR-YA-18f">
                                         <rect key="frame" x="0.0" y="101.66666666666669" width="390" height="102"/>
                                     </pickerView>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mobile/Email or ID" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="H5z-Z4-mfc">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="anokhias@gmail.com" borderStyle="roundedRect" placeholder="Mobile/Email or ID" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="H5z-Z4-mfc">
                                         <rect key="frame" x="0.0" y="203.66666666666669" width="390" height="101.66666666666669"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -102,16 +103,20 @@
             </objects>
             <point key="canvasLocation" x="973.95348837209303" y="-2.5751072961373391"/>
         </scene>
-        <!--View Controller-->
+        <!--Email Or Mobile View Controller-->
         <scene sceneID="ynS-yK-5cq">
             <objects>
-                <viewController id="L72-if-qbE" sceneMemberID="viewController">
+                <viewController id="L72-if-qbE" customClass="EmailOrMobileViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YRb-3V-hRj">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="hFe-3p-tdt">
                                 <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="z5h-AE-gXk">
+                                <rect key="frame" x="10" y="10" width="430" height="932"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ad3-D2-uNd">
                                 <rect key="frame" x="0.0" y="113" width="430" height="93.333333333333314"/>
