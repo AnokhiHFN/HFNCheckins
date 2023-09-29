@@ -19,12 +19,12 @@ struct ConfettiPiece: View {
     let speed: Double
     
     @State private var rotation: Double = .random(in: 0...360)
-    @State private var position: CGPoint = CGPoint(x: .random(in: 0...UIScreen.main.bounds.width), y: -10)
+    @State private var position: CGPoint = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2) // Center
     
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(Color.black) // Set the background color to black
+                .fill(Color.clear) // Set the background color to clear
                 .frame(width: 10, height: 20)
                 .rotationEffect(.degrees(rotation))
                 .position(position)
@@ -40,9 +40,9 @@ struct ConfettiPiece: View {
         .onAppear {
             withAnimation(Animation.linear(duration: speed).repeatForever(autoreverses: false)) {
                 self.rotation += .random(in: -45...45) // Random rotation
-                self.position.y = UIScreen.main.bounds.height + 10 // Fall to the bottom of the screen
+                self.position.x = .random(in: 0...UIScreen.main.bounds.width) // Random horizontal position
+                self.position.y = .random(in: 0...UIScreen.main.bounds.height) // Random vertical position
             }
         }
     }
 }
-
