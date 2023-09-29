@@ -18,6 +18,7 @@
 		FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147462AC41B0200A27646 /* EmailOrMobileViewController.swift */; };
 		FC3147492AC59E3700A27646 /* CheckInForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147482AC59E3700A27646 /* CheckInForm.swift */; };
 		FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147522AC6099300A27646 /* FinalScreenViewController.swift */; };
+		FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147542AC6DA3000A27646 /* Confetti.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		FC3147462AC41B0200A27646 /* EmailOrMobileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOrMobileViewController.swift; sourceTree = "<group>"; };
 		FC3147482AC59E3700A27646 /* CheckInForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInForm.swift; sourceTree = "<group>"; };
 		FC3147522AC6099300A27646 /* FinalScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScreenViewController.swift; sourceTree = "<group>"; };
+		FC3147542AC6DA3000A27646 /* Confetti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				FC31470F2AB4B68100A27646 /* Main.storyboard */,
 				FC3147482AC59E3700A27646 /* CheckInForm.swift */,
+				FC3147542AC6DA3000A27646 /* Confetti.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				FC3147432ABF199A00A27646 /* AbhyasiManager.swift in Sources */,
 				FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */,
 				FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */,
+				FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */,
 				FC3147212ABB0BC200A27646 /* BatchManager.swift in Sources */,
 				FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */,
 				FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */,
