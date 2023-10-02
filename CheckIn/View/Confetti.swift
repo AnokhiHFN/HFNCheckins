@@ -31,7 +31,7 @@ struct CircleConfettiPiece: View {
         ZStack {
             Circle()
                 .fill(colors.randomElement() ?? .red) // Fill with a random color from your array
-                .frame(width: 2, height: 2) // Adjust the size of the circle
+                .frame(width: 4, height: 4) // Adjust the size of the circle
                 .rotationEffect(.degrees(rotation))
                 .position(position)
         }
@@ -57,7 +57,7 @@ struct RectangleConfettiPiece: View {
         ZStack {
             Rectangle()
                 .fill(colors.randomElement() ?? .red) // Fill with a random color from your array
-                .frame(width: 5, height: 5) // Adjust the size of the rectangle
+                .frame(width: 8, height: 8) // Adjust the size of the rectangle
                 .rotationEffect(.degrees(rotation))
                 .position(position)
         }
