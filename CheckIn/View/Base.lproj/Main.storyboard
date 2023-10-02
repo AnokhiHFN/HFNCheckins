@@ -144,10 +144,29 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KkL-sY-2lD"/>
+                    <connections>
+                        <segue destination="gP3-6B-HeM" kind="show" identifier="CheckinToFinalScreen" id="SX5-DJ-xAv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tf2-fG-AWy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2009.3023255813953" y="-174.46351931330474"/>
+        </scene>
+        <!--Final Screen View Controller-->
+        <scene sceneID="f5l-yl-zrx">
+            <objects>
+                <viewController id="gP3-6B-HeM" customClass="FinalScreenViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kJD-T0-dgg">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="f7E-zr-nGc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4ef-2E-fRC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I0X-Uc-ehZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2884" y="-343"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JQA-Gb-rh2">
