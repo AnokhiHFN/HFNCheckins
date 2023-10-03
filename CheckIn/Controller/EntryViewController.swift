@@ -8,7 +8,7 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     let batchOptions = ["Batch-1", "Batch-2", "Batch-3"]
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         // Create a background image view
         let backgroundImage = UIImageView(frame: view.bounds)
         backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
@@ -52,6 +52,7 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         startButton.layer.cornerRadius = 10
         startButton.addTarget(self, action: #selector(startCheckIn), for: .touchUpInside)
         startButton.isEnabled = false // Initially disable the button
+        startButton.alpha = 0.5 // Set the alpha to make it pale
         view.addSubview(startButton)
 
         
@@ -172,6 +173,7 @@ extension EntryViewController: UITextFieldDelegate {
         // Check if the info text field will have some input after the change
         let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         startButton.isEnabled = !(updatedText?.isEmpty ?? true)
+        startButton.alpha = 1 // Set the alpha to make it normal
         return true
     }
 }
