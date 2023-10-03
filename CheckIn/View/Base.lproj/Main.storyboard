@@ -22,11 +22,31 @@
                     <navigationItem key="navigationItem" id="U9g-L0-cSY"/>
                     <connections>
                         <segue destination="L72-if-qbE" kind="show" identifier="CheckInSegue" id="cyb-1P-PVd"/>
+                        <segue destination="Aew-7y-TTk" kind="show" identifier="DormSegue" id="4Ud-kd-mH8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ka-nh-ufM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2725.1162790697672" y="-194.42060085836911"/>
+        </scene>
+        <!--Dorm View Controller-->
+        <scene sceneID="1bj-09-O58">
+            <objects>
+                <viewController id="Aew-7y-TTk" customClass="DormViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wjg-SE-Slu">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="IHN-2G-VfL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="d2b-dH-Dpo"/>
+                    <connections>
+                        <segue destination="gP3-6B-HeM" kind="show" identifier="DormToCheckinSegue" id="eXM-vp-s6w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FeW-hA-Uqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3755" y="-638"/>
         </scene>
         <!--Email Or Mobile View Controller-->
         <scene sceneID="ynS-yK-5cq">
@@ -67,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tf2-fG-AWy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3806.5116279069766" y="-174.46351931330474"/>
+            <point key="canvasLocation" x="3756" y="177"/>
         </scene>
         <!--Final Screen View Controller-->
         <scene sceneID="f5l-yl-zrx">
@@ -104,6 +124,9 @@
             <point key="canvasLocation" x="1826.5116279069766" y="-194.42060085836911"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="eXM-vp-s6w"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Background" width="1290" height="2796"/>
         <systemColor name="systemBackgroundColor">
