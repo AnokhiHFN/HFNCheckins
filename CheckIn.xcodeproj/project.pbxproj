@@ -19,7 +19,6 @@
 		FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147542AC6DA3000A27646 /* Confetti.swift */; };
 		FCA7CFF22ACB07C9006C93E3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */; };
 		FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */; };
-		FCA7CFF92ACC59CB006C93E3 /* BatchPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF82ACC59CB006C93E3 /* BatchPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +36,6 @@
 		FC3147542AC6DA3000A27646 /* Confetti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 		FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
-		FCA7CFF82ACC59CB006C93E3 /* BatchPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +121,6 @@
 				FC3147482AC59E3700A27646 /* CheckInForm.swift */,
 				FC3147542AC6DA3000A27646 /* Confetti.swift */,
 				FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */,
-				FCA7CFF82ACC59CB006C93E3 /* BatchPicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -205,7 +202,6 @@
 				FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */,
 				FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */,
 				FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */,
-				FCA7CFF92ACC59CB006C93E3 /* BatchPicker.swift in Sources */,
 				FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */,
 				FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */,
 				FC3147492AC59E3700A27646 /* CheckInForm.swift in Sources */,
