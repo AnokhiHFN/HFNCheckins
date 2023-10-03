@@ -161,8 +161,16 @@ extension EntryViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Check if the info text field will have some input after the change
         let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-        startButton.isEnabled = !(updatedText?.isEmpty ?? true)
-        startButton.alpha = 1 // Set the alpha to make it normal
+        
+        // Enable the startButton only if the updatedText is "20"
+        if updatedText == "20" {
+            startButton.isEnabled = true
+            startButton.alpha = 1.0 // Set the alpha to make it normal
+        } else {
+            startButton.isEnabled = false
+            startButton.alpha = 0.5 // Set the alpha to make it pale
+        }
+        
         return true
     }
 }
