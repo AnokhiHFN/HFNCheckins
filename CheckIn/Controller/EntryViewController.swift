@@ -1,6 +1,6 @@
 import UIKit
 
-class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class EntryViewController: UIViewController {
     
     // Create a reference to the Start Check-In button
     let startButton = UIButton(type: .system)
@@ -9,6 +9,7 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Create a background image view
         let backgroundImage = UIImageView(frame: view.bounds)
         backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
@@ -16,18 +17,9 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         view.addSubview(backgroundImage)
         
         // Create a label
-        // Create a label
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "68th Birthday Celebrations of\nPujya Daaji Maharaja" // Use '\n' for line break
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold) // Increase font size
-        titleLabel.numberOfLines = 2 // Allow for multiple lines
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = UIColor(named: "buttonColor") // Set the text color to "buttonColor"
+        let titleLabel = TitleLabel()
         view.addSubview(titleLabel)
-
-
+        
         // Create a picker view for Batch
         let batchPickerView = UIPickerView()
         batchPickerView.delegate = self // Set the delegate
@@ -43,7 +35,6 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         view.addSubview(infoTextField)
         
         // Create a button for starting check-in
-        // Create a button for starting check-in
         startButton.isUserInteractionEnabled = true
         startButton.translatesAutoresizingMaskIntoConstraints = false
         startButton.setTitle("Start Check-In", for: .normal)
@@ -54,7 +45,6 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         startButton.isEnabled = false // Initially disable the button
         startButton.alpha = 0.5 // Set the alpha to make it pale
         view.addSubview(startButton)
-
         
         // Set up constraints for the elements within the view
         // Set up constraints for the elements within the view
@@ -66,14 +56,13 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         containerView.layer.cornerRadius = 15 // Set the corner radius as needed
         containerView.layer.masksToBounds = true // Ensure that content stays within the rounded corners
         view.addSubview(containerView)
-
-
+        
         // Add the title label, picker view, text field, and button to the container view
         containerView.addSubview(titleLabel)
         containerView.addSubview(batchPickerView)
         containerView.addSubview(infoTextField)
         containerView.addSubview(startButton)
-
+        
         // Set up constraints for the elements within the container view
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
@@ -81,7 +70,7 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             containerView.bottomAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 20) // Adjust as needed
         ])
-
+        
         // Adjust constraints for items inside the container view
         // (Use containerView as the superview for constraints)
         NSLayoutConstraint.activate([
@@ -113,7 +102,7 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         scanButton.layer.cornerRadius = 10 // Set the corner radius as needed
         scanButton.addTarget(self, action: #selector(scanAction), for: .touchUpInside)
         view.addSubview(scanButton)
-
+        
         // Set up constraints for the "Scan" button
         NSLayoutConstraint.activate([
             scanButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70), // Adjust the bottom spacing as needed
@@ -123,33 +112,6 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         ])
         
         infoTextField.delegate = self
-    }
-    
-    // MARK: - UIPickerViewDataSource methods
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1 // Number of columns in the picker view
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return batchOptions.count // Number of rows in the picker view
-    }
-    
-    // MARK: - UIPickerViewDelegate methods
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return batchOptions[row] // Display the options from the data source
-    }
-    
-    // MARK: - UIPickerViewDelegate methods
-
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let title = batchOptions[row]
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor(named: "buttonColor")!
-        ]
-        let attributedTitle = NSAttributedString(string: title, attributes: attributes)
-        return attributedTitle
     }
     
     @objc func startCheckIn() {
@@ -163,8 +125,34 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     }
 }
 
-// MARK: - UITextFieldDelegate methods
+// MARK: - UIPickerViewDataSource methods
 
+extension EntryViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1 // Number of columns in the picker view
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return batchOptions.count // Number of rows in the picker view
+    }
+}
+
+// MARK: - UIPickerViewDelegate methods
+
+extension EntryViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return batchOptions[row] // Display the options from the data source
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let title = batchOptions[row]
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(named: "buttonColor")!
+        ]
+        let attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        return attributedTitle
+    }
+}
 
 // MARK: - UITextFieldDelegate methods
 
