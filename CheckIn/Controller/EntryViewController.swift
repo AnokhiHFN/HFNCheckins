@@ -122,7 +122,6 @@ class EntryViewController: UIViewController {
         // Handle the action when the "Start Check-In" button is tapped
         
         performSegue(withIdentifier: segue, sender: self)
-        segue = ""
         
     }
     
@@ -188,7 +187,7 @@ extension EntryViewController:
         else if (updatedText != nil) == abhyasiManager.isValidId() {
                 startButton.isEnabled = true
                 startButton.alpha = 1.0 // Set the alpha to make it normal
-            segue = "CheckInSegue"
+            segue = "DormSegue"
             
         }
         else {

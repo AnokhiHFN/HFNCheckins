@@ -1,0 +1,126 @@
+import UIKit
+
+class DormViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Create a background image view
+        let backgroundImage = UIImageView(frame: view.bounds)
+        backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
+        backgroundImage.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImage)
+        
+        // Create a container view with a background color
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.backgroundColor = UIColor(named: "smallerBackground") // Replace with your desired background color
+        containerView.layer.cornerRadius = 15 // Set the corner radius as needed
+        containerView.layer.masksToBounds = true // Ensure that content stays within the rounded corners
+        view.addSubview(containerView)
+        
+        // Create a label for "Checkin With Abhyasi ID"
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = "Checkin With Abhyasi ID"
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        titleLabel.textColor = UIColor(named: "YourTextColor") // Set the text color you want
+        containerView.addSubview(titleLabel)
+        
+        // Create a label for "Abhyasi ID:"
+        let abhyasiIDLabel = UILabel()
+        abhyasiIDLabel.translatesAutoresizingMaskIntoConstraints = false
+        abhyasiIDLabel.text = "Abhyasi ID:"
+        abhyasiIDLabel.font = UIFont.systemFont(ofSize: 16)
+        containerView.addSubview(abhyasiIDLabel)
+        
+        // Create a label for "Batch:"
+        let batchLabel = UILabel()
+        batchLabel.translatesAutoresizingMaskIntoConstraints = false
+        batchLabel.text = "Batch:"
+        batchLabel.font = UIFont.systemFont(ofSize: 16)
+        containerView.addSubview(batchLabel)
+        
+        // Create an info text field with header "Dorm and Berth Allocations"
+        let infoTextField = UITextField()
+        infoTextField.isUserInteractionEnabled = true
+        infoTextField.translatesAutoresizingMaskIntoConstraints = false
+        infoTextField.placeholder = "Dorm and Berth Allocations"
+        infoTextField.borderStyle = .roundedRect
+        containerView.addSubview(infoTextField)
+        
+        // Create a button for "Cancel"
+        let cancelButton = UIButton(type: .system)
+        cancelButton.isUserInteractionEnabled = true
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.backgroundColor = UIColor(named: "buttonColor") // Set the background color to "buttonColor"
+        cancelButton.setTitleColor(.white, for: .normal)
+        cancelButton.layer.cornerRadius = 10
+        // Add a target action for the Cancel button
+        cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        containerView.addSubview(cancelButton)
+        
+        // Create a button for "CheckIn"
+        let checkInButton = UIButton(type: .system)
+        checkInButton.isUserInteractionEnabled = true
+        checkInButton.translatesAutoresizingMaskIntoConstraints = false
+        checkInButton.setTitle("CheckIn", for: .normal)
+        checkInButton.backgroundColor = UIColor(named: "buttonColor") // Set the background color to "buttonColor"
+        checkInButton.setTitleColor(.white, for: .normal)
+        checkInButton.layer.cornerRadius = 10
+        // Add a target action for the CheckIn button
+        checkInButton.addTarget(self, action: #selector(checkInAction), for: .touchUpInside)
+        containerView.addSubview(checkInButton)
+        
+        // Set up constraints for the container view
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250), // Adjust the top spacing as needed
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300) // Adjust the bottom spacing as needed
+        ])
+        
+        // Set up constraints for the UI elements within the container view
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            
+            abhyasiIDLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            abhyasiIDLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            
+            batchLabel.topAnchor.constraint(equalTo: abhyasiIDLabel.bottomAnchor, constant: 20),
+            batchLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            
+            infoTextField.topAnchor.constraint(equalTo: batchLabel.bottomAnchor, constant: 20),
+            infoTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            infoTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            
+            cancelButton.topAnchor.constraint(equalTo: infoTextField.bottomAnchor, constant: 20),
+            cancelButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            cancelButton.widthAnchor.constraint(equalToConstant: 100), // Adjust the width as needed
+            cancelButton.heightAnchor.constraint(equalToConstant: 40), // Adjust the height as needed
+            
+            checkInButton.topAnchor.constraint(equalTo: infoTextField.bottomAnchor, constant: 20),
+            checkInButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            checkInButton.widthAnchor.constraint(equalToConstant: 100), // Adjust the width as needed
+            checkInButton.heightAnchor.constraint(equalToConstant: 40) // Adjust the height as needed
+        ])
+    }
+    
+    // Function to handle the "Cancel" button tap
+    @objc func cancelAction() {
+        // Handle the action when the "Cancel" button is tapped
+        print("Cancel tapped")
+    }
+    
+    // Function to handle the "CheckIn" button tap
+    @objc func checkInAction() {
+        // Handle the action when the "CheckIn" button is tapped
+        print("CheckIn tapped")
+        
+        performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
+    }
+}
