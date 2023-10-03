@@ -1,14 +1,14 @@
 import UIKit
-import SwiftUI
 
 class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    // Create a reference to the Start Check-In button
+    let startButton = UIButton(type: .system)
     // Define the data source for the picker view
     let batchOptions = ["Batch-1", "Batch-2", "Batch-3"]
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         // Create a background image view
         let backgroundImage = UIImageView(frame: view.bounds)
         backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
@@ -44,14 +44,14 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         
         // Create a button for starting check-in
         // Create a button for starting check-in
-        let startButton = UIButton(type: .system)
         startButton.isUserInteractionEnabled = true
         startButton.translatesAutoresizingMaskIntoConstraints = false
         startButton.setTitle("Start Check-In", for: .normal)
-        startButton.backgroundColor = UIColor(named: "buttonColor") // Set the background color
-        startButton.setTitleColor(.white, for: .normal) // Set the text color
-        startButton.layer.cornerRadius = 10 // Set the corner radius as needed
+        startButton.backgroundColor = UIColor(named: "buttonColor")
+        startButton.setTitleColor(.white, for: .normal)
+        startButton.layer.cornerRadius = 10
         startButton.addTarget(self, action: #selector(startCheckIn), for: .touchUpInside)
+        startButton.isEnabled = false // Initially disable the button
         view.addSubview(startButton)
 
         
@@ -120,7 +120,8 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
             scanButton.widthAnchor.constraint(equalToConstant: 80), // Adjust the width as needed
             scanButton.heightAnchor.constraint(equalToConstant: 40) // Adjust the height as needed
         ])
-
+        
+        infoTextField.delegate = self
     }
     
     // MARK: - UIPickerViewDataSource methods
@@ -149,7 +150,6 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         let attributedTitle = NSAttributedString(string: title, attributes: attributes)
         return attributedTitle
     }
-
     
     @objc func startCheckIn() {
         // Handle the action when the "Start Check-In" button is tapped
@@ -159,5 +159,19 @@ class EntryViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     // Function to handle the "Scan" button tap
     @objc func scanAction() {
         print("Scanning")
+    }
+}
+
+// MARK: - UITextFieldDelegate methods
+
+
+// MARK: - UITextFieldDelegate methods
+
+extension EntryViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Check if the info text field will have some input after the change
+        let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        startButton.isEnabled = !(updatedText?.isEmpty ?? true)
+        return true
     }
 }
