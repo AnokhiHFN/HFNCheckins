@@ -32,6 +32,7 @@ class EntryViewController: UIViewController {
         infoTextField.translatesAutoresizingMaskIntoConstraints = false
         infoTextField.placeholder = "Enter Info"
         infoTextField.borderStyle = .roundedRect
+        infoTextField.textColor = UIColor(named: "EntryTextColor")
         view.addSubview(infoTextField)
         
         // Create a button for starting check-in
@@ -147,7 +148,7 @@ extension EntryViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let title = batchOptions[row]
         let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor(named: "buttonColor")!
+            .foregroundColor: UIColor(named: "EntryTextColor")!
         ]
         let attributedTitle = NSAttributedString(string: title, attributes: attributes)
         return attributedTitle

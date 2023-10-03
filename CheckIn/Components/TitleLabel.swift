@@ -19,6 +19,6 @@ class TitleLabel: UILabel {
         font = UIFont.systemFont(ofSize: 24, weight: .bold) // Increase font size
         numberOfLines = 2 // Allow for multiple lines
         adjustsFontSizeToFitWidth = true
-        textColor = UIColor(named: "buttonColor") // Set the text color to "buttonColor"
+        textColor = UIColor(named: "EntryTextColor") // Set the text color to "buttonColor"
     }
 }
