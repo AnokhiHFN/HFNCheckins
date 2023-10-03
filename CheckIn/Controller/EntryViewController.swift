@@ -7,6 +7,9 @@ class EntryViewController: UIViewController {
     // Define the data source for the picker view
     let batchOptions = ["Batch-1", "Batch-2", "Batch-3"]
     
+    var segue :String = ""
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,7 +120,10 @@ class EntryViewController: UIViewController {
     
     @objc func startCheckIn() {
         // Handle the action when the "Start Check-In" button is tapped
-        performSegue(withIdentifier: "CheckInSegue", sender: self)
+        
+        performSegue(withIdentifier: segue, sender: self)
+        segue = ""
+        
     }
     
     // Function to handle the "Scan" button tap
@@ -157,20 +163,41 @@ extension EntryViewController: UIPickerViewDelegate {
 
 // MARK: - UITextFieldDelegate methods
 
-extension EntryViewController: UITextFieldDelegate {
+extension EntryViewController:
+                                    
+    UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Check if the info text field will have some input after the change
         let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         
-        // Enable the startButton only if the updatedText is "20"
-        if updatedText == "20" {
+        // Enable the startButton only if validID or ValidEmail
+        let abhyasiManager = AbhyasiManager(updatedText!)
+
+        if (updatedText != nil) == abhyasiManager.isValidEmail(){
             startButton.isEnabled = true
             startButton.alpha = 1.0 // Set the alpha to make it normal
-        } else {
+            segue = "CheckInSegue"
+            
+        }
+        else if (updatedText != nil) == abhyasiManager.isValidNumber() {
+                startButton.isEnabled = true
+                startButton.alpha = 1.0 // Set the alpha to make it normal
+            segue = "CheckInSegue"
+            
+        }
+        else if (updatedText != nil) == abhyasiManager.isValidId() {
+                startButton.isEnabled = true
+                startButton.alpha = 1.0 // Set the alpha to make it normal
+            segue = "CheckInSegue"
+            
+        }
+        else {
             startButton.isEnabled = false
             startButton.alpha = 0.5 // Set the alpha to make it pale
+            segue = "Invalid"
+
         }
-        
+        print(segue)
         return true
     }
 }
