@@ -19,6 +19,7 @@
 		FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147542AC6DA3000A27646 /* Confetti.swift */; };
 		FCA7CFF22ACB07C9006C93E3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */; };
 		FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */; };
+		FCA7CFFF2ACDB4A5006C93E3 /* DormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		FC3147542AC6DA3000A27646 /* Confetti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 		FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DormViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		FC31471F2AB82FB900A27646 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */,
 				FC3147462AC41B0200A27646 /* EmailOrMobileViewController.swift */,
 				FC3147522AC6099300A27646 /* FinalScreenViewController.swift */,
 				FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */,
@@ -196,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCA7CFFF2ACDB4A5006C93E3 /* DormViewController.swift in Sources */,
 				FCA7CFF22ACB07C9006C93E3 /* EntryViewController.swift in Sources */,
 				FC3147432ABF199A00A27646 /* AbhyasiManager.swift in Sources */,
 				FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */,

@@ -2,6 +2,7 @@ import UIKit
 
 class EntryViewController: UIViewController {
     
+    let batchPickerView = UIPickerView()
     // Create a reference to the Start Check-In button
     let startButton = UIButton(type: .system)
     // Define the data source for the picker view
@@ -24,7 +25,7 @@ class EntryViewController: UIViewController {
         view.addSubview(titleLabel)
         
         // Create a picker view for Batch
-        let batchPickerView = UIPickerView()
+       
         batchPickerView.delegate = self // Set the delegate
         batchPickerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(batchPickerView)
@@ -120,7 +121,6 @@ class EntryViewController: UIViewController {
     
     @objc func startCheckIn() {
         // Handle the action when the "Start Check-In" button is tapped
-        
         performSegue(withIdentifier: segue, sender: self)
         
     }
@@ -140,6 +140,19 @@ extension EntryViewController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return batchOptions.count // Number of rows in the picker view
+    }
+    
+    // Method to get the selected batch from the picker
+    func getSelectedBatch() -> String? {
+        let selectedRow = batchPickerView.selectedRow(inComponent: 0)
+        
+        // Check if the selectedRow is within the bounds of the batchOptions array
+        if selectedRow >= 0 && selectedRow < batchOptions.count {
+            print(batchOptions[selectedRow])
+            return batchOptions[selectedRow]
+        } else {
+            return nil // Return nil if no valid selection is made
+        }
     }
 }
 
