@@ -1,14 +1,20 @@
 import UIKit
 
-class EntryViewController: UIViewController {
+class EntryViewController: UIViewController, DormViewControllerDelegate{
+
+    
+
+    var dormViewController: DormViewController?
     
     let batchPickerView = UIPickerView()
+    
     // Create a reference to the Start Check-In button
     let startButton = UIButton(type: .system)
     // Define the data source for the picker view
     let batchOptions = ["Batch-1", "Batch-2", "Batch-3"]
     
     var segue :String = ""
+    var abhayasiID: String = ""
 
     
     override func viewDidLoad() {
@@ -25,9 +31,9 @@ class EntryViewController: UIViewController {
         view.addSubview(titleLabel)
         
         // Create a picker view for Batch
-       
         batchPickerView.delegate = self // Set the delegate
         batchPickerView.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(batchPickerView)
         
         // Create a text field for info
@@ -129,6 +135,23 @@ class EntryViewController: UIViewController {
     @objc func scanAction() {
         print("Scanning")
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? DormViewController {
+            // Set the delegate and dormViewController properties
+            destinationVC.delegate = self
+            dormViewController = destinationVC
+            destinationVC.selectedBatch = getSelectedBatch()
+            destinationVC.abhyasiID = abhayasiID
+        }
+    }
+
+    // MARK: - DormViewControllerDelegate method
+    func didSelectBatch(_ batch: String) {
+        // Set the selected batch value in DormViewController
+        dormViewController?.selectedBatch = batch
+        performSegue(withIdentifier: segue, sender: self)
+    }
 }
 
 // MARK: - UIPickerViewDataSource methods
@@ -184,7 +207,7 @@ extension EntryViewController:
         
         // Enable the startButton only if validID or ValidEmail
         let abhyasiManager = AbhyasiManager(updatedText!)
-
+        abhayasiID = updatedText!
         if (updatedText != nil) == abhyasiManager.isValidEmail(){
             startButton.isEnabled = true
             startButton.alpha = 1.0 // Set the alpha to make it normal
