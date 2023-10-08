@@ -1,7 +1,18 @@
 import UIKit
 
+// Define a protocol for communication between EntryViewController and DormViewController
+protocol DormViewControllerDelegate: AnyObject {
+    func didSelectBatch(_ batch: String)
+}
+
 class DormViewController: UIViewController {
 
+    // Define a delegate property to communicate with DormViewController
+    weak var delegate: DormViewControllerDelegate?
+    // Property to store the selected batch value
+    var selectedBatch: String?
+    var abhyasiID: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,14 +42,14 @@ class DormViewController: UIViewController {
         // Create a label for "Abhyasi ID:"
         let abhyasiIDLabel = UILabel()
         abhyasiIDLabel.translatesAutoresizingMaskIntoConstraints = false
-        abhyasiIDLabel.text = "Abhyasi ID:"
+        abhyasiIDLabel.text = "\(abhyasiID!)"
         abhyasiIDLabel.font = UIFont.systemFont(ofSize: 16)
         containerView.addSubview(abhyasiIDLabel)
         
         // Create a label for "Batch:"
         let batchLabel = UILabel()
         batchLabel.translatesAutoresizingMaskIntoConstraints = false
-        batchLabel.text = "Batch:"
+        batchLabel.text = "\(selectedBatch!)"
         batchLabel.font = UIFont.systemFont(ofSize: 16)
         containerView.addSubview(batchLabel)
         
@@ -113,14 +124,13 @@ class DormViewController: UIViewController {
     // Function to handle the "Cancel" button tap
     @objc func cancelAction() {
         // Handle the action when the "Cancel" button is tapped
-        print("Cancel tapped")
+        
     }
     
     // Function to handle the "CheckIn" button tap
     @objc func checkInAction() {
         // Handle the action when the "CheckIn" button is tapped
-        print("CheckIn tapped")
-        
+       
         performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
     }
 }

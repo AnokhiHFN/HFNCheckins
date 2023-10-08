@@ -1,13 +1,25 @@
 import UIKit
 
-class EntryViewController: UIViewController {
+class EntryViewController: UIViewController,EmailOrMobileViewControllerDelegate,
+DormViewControllerDelegate{
+
+    
+
+    var dormViewController: DormViewController?
+    var emailOrMobileViewController: EmailOrMobileViewController?
+    
+    let batchPickerView = UIPickerView()
     
     // Create a reference to the Start Check-In button
     let startButton = UIButton(type: .system)
     // Define the data source for the picker view
     let batchOptions = ["Batch-1", "Batch-2", "Batch-3"]
-    
+
+
     var segue :String = ""
+    var abhayasiID: String = ""
+    var email: String?
+    var mobile: String?
 
     
     override func viewDidLoad() {
@@ -24,9 +36,9 @@ class EntryViewController: UIViewController {
         view.addSubview(titleLabel)
         
         // Create a picker view for Batch
-        let batchPickerView = UIPickerView()
         batchPickerView.delegate = self // Set the delegate
         batchPickerView.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(batchPickerView)
         
         // Create a text field for info
@@ -120,14 +132,45 @@ class EntryViewController: UIViewController {
     
     @objc func startCheckIn() {
         // Handle the action when the "Start Check-In" button is tapped
-        
         performSegue(withIdentifier: segue, sender: self)
         
     }
     
     // Function to handle the "Scan" button tap
     @objc func scanAction() {
-        print("Scanning")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? DormViewController {
+            // Set the delegate and dormViewController properties
+            destinationVC.delegate = self
+            dormViewController = destinationVC
+            destinationVC.selectedBatch = getSelectedBatch()
+            destinationVC.abhyasiID = abhayasiID
+        }
+        if let destinationVC = segue.destination as? EmailOrMobileViewController,
+           segue.identifier == "CheckInSegue" {
+            print("Preparing for segue to EmailOrMobileViewController")
+            destinationVC.selectedBatch = getSelectedBatch()
+            if (email != nil) {
+                destinationVC.givenEmail = email
+            }
+            if (mobile != nil){
+                destinationVC.givenMobile = mobile
+            }
+        }
+    }
+
+    // MARK: - DormViewControllerDelegate method
+    func didSelectBatch(_ batch: String) {
+        // Set the selected batch value in DormViewController
+        dormViewController?.selectedBatch = batch
+        performSegue(withIdentifier: segue, sender: self)
+    }
+    
+    func didSelectBatchEmailMobile(_ batch: String) {
+        emailOrMobileViewController?.batch = batch
+        performSegue(withIdentifier: segue, sender: self)
     }
 }
 
@@ -140,6 +183,18 @@ extension EntryViewController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return batchOptions.count // Number of rows in the picker view
+    }
+    
+    // Method to get the selected batch from the picker
+    func getSelectedBatch() -> String? {
+        let selectedRow = batchPickerView.selectedRow(inComponent: 0)
+        
+        // Check if the selectedRow is within the bounds of the batchOptions array
+        if selectedRow >= 0 && selectedRow < batchOptions.count {
+            return batchOptions[selectedRow]
+        } else {
+            return nil // Return nil if no valid selection is made
+        }
     }
 }
 
@@ -171,20 +226,27 @@ extension EntryViewController:
         
         // Enable the startButton only if validID or ValidEmail
         let abhyasiManager = AbhyasiManager(updatedText!)
-
+        
         if (updatedText != nil) == abhyasiManager.isValidEmail(){
+            email = updatedText!
+            mobile = ""
             startButton.isEnabled = true
             startButton.alpha = 1.0 // Set the alpha to make it normal
             segue = "CheckInSegue"
             
+            
         }
         else if (updatedText != nil) == abhyasiManager.isValidNumber() {
+            mobile = updatedText!
+            print(mobile!)
+            email = ""
                 startButton.isEnabled = true
                 startButton.alpha = 1.0 // Set the alpha to make it normal
             segue = "CheckInSegue"
             
         }
         else if (updatedText != nil) == abhyasiManager.isValidId() {
+                abhayasiID = updatedText!
                 startButton.isEnabled = true
                 startButton.alpha = 1.0 // Set the alpha to make it normal
             segue = "DormSegue"
@@ -196,7 +258,7 @@ extension EntryViewController:
             segue = "Invalid"
 
         }
-        print(segue)
+        print("Segue: \(segue)")
         return true
     }
 }

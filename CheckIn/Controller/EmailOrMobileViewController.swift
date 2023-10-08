@@ -1,17 +1,59 @@
 import SwiftUI
 
+// Define a protocol for communication between EntryViewController and DormViewController
+protocol EmailOrMobileViewControllerDelegate: AnyObject {
+    func didSelectBatchEmailMobile(_ batch: String)
+}
+
 class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
+    
+    weak var delegate: EmailOrMobileViewControllerDelegate?
+    var selectedBatch: String? {
+        didSet {
+            // Update batch when selectedBatch changes
+            batch = selectedBatch
+        }
+    }
+    var givenEmail: String? {
+        didSet {
+            // Update batch when selectedBatch changes
+            email = givenEmail
+        }
+    }
+    var givenMobile: String? {
+        didSet {
+            // Update batch when selectedBatch changes
+            mobile = givenMobile
+        }
+    }
+    @State var batch: String? = "DefaultBatchError" // Provide a default value
+    @State var email: String? = "DefaultEmailError" //
+    @State var mobile: String? = "DefaultMobileError" //
+
     func checkinButtonPressed() {
-        print("in the right method")
+        print("debugging: \(selectedBatch ?? "hello")")
         performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hellooooo")
         
         // Create a SwiftUI view
-        var swiftUIView = SwiftUIView()
+        let batchBinding = Binding<String>(
+            get: { self.selectedBatch ?? "dummy" },
+            set: { self.selectedBatch = $0 }
+        )
+        let emailBinding = Binding<String>(
+            get: { self.givenEmail ?? "" },
+            set: { self.givenEmail = $0 }
+        )
+        let mobileBinding = Binding<String>(
+            get: { self.givenMobile ?? "" },
+            set: { self.givenMobile = $0 }
+        )
+
+        // Create a SwiftUI view with the binding
+        var swiftUIView = SwiftUIView(batch: batchBinding, email: emailBinding, mobile: mobileBinding)
         swiftUIView.delegate = self
         
         // Embed the SwiftUI view within a UIHostingController
