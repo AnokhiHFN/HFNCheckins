@@ -1,10 +1,12 @@
 import UIKit
 
-class EntryViewController: UIViewController, DormViewControllerDelegate{
+class EntryViewController: UIViewController,EmailOrMobileViewControllerDelegate,
+DormViewControllerDelegate{
 
     
 
     var dormViewController: DormViewController?
+    var emailOrMobileViewController: EmailOrMobileViewController?
     
     let batchPickerView = UIPickerView()
     
@@ -12,7 +14,8 @@ class EntryViewController: UIViewController, DormViewControllerDelegate{
     let startButton = UIButton(type: .system)
     // Define the data source for the picker view
     let batchOptions = ["Batch-1", "Batch-2", "Batch-3"]
-    
+
+
     var segue :String = ""
     var abhayasiID: String = ""
 
@@ -133,7 +136,6 @@ class EntryViewController: UIViewController, DormViewControllerDelegate{
     
     // Function to handle the "Scan" button tap
     @objc func scanAction() {
-        print("Scanning")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -144,12 +146,21 @@ class EntryViewController: UIViewController, DormViewControllerDelegate{
             destinationVC.selectedBatch = getSelectedBatch()
             destinationVC.abhyasiID = abhayasiID
         }
+        if let destinationVC = segue.destination as? EmailOrMobileViewController,
+           segue.identifier == "CheckInSegue" {
+            print("Preparing for segue to EmailOrMobileViewController")
+            destinationVC.selectedBatch = getSelectedBatch()      }
     }
 
     // MARK: - DormViewControllerDelegate method
     func didSelectBatch(_ batch: String) {
         // Set the selected batch value in DormViewController
         dormViewController?.selectedBatch = batch
+        performSegue(withIdentifier: segue, sender: self)
+    }
+    
+    func didSelectBatchEmailMobile(_ batch: String) {
+        emailOrMobileViewController?.batch = batch
         performSegue(withIdentifier: segue, sender: self)
     }
 }
@@ -171,7 +182,7 @@ extension EntryViewController: UIPickerViewDataSource {
         
         // Check if the selectedRow is within the bounds of the batchOptions array
         if selectedRow >= 0 && selectedRow < batchOptions.count {
-            print(batchOptions[selectedRow])
+            print ("batch: \(batchOptions[selectedRow])")
             return batchOptions[selectedRow]
         } else {
             return nil // Return nil if no valid selection is made
@@ -232,7 +243,7 @@ extension EntryViewController:
             segue = "Invalid"
 
         }
-        print(segue)
+        print("Segue: \(segue)")
         return true
     }
 }

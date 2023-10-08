@@ -124,14 +124,13 @@ class DormViewController: UIViewController {
     // Function to handle the "Cancel" button tap
     @objc func cancelAction() {
         // Handle the action when the "Cancel" button is tapped
-        print("Cancel tapped")
+        
     }
     
     // Function to handle the "CheckIn" button tap
     @objc func checkInAction() {
         // Handle the action when the "CheckIn" button is tapped
-        print("CheckIn tapped")
-        
+       
         performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
     }
 }

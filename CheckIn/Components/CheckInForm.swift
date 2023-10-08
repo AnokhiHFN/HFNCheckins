@@ -6,7 +6,7 @@ protocol CheckInFormDelegate: AnyObject {
 
 struct SwiftUIView: View {
     weak var delegate: CheckInFormDelegate?
-    @State private var batch = ""
+    @Binding var batch: String // Use Binding
     @State private var fullName = ""
     @State private var selectedAgeRange = 0
     @State private var gender = "Male"
@@ -34,6 +34,7 @@ struct SwiftUIView: View {
             Form {
                 Section {
                     TextField("Batch", text: $batch)
+                        .disabled(true)
                 }
                 
                 Section {
@@ -82,8 +83,7 @@ struct SwiftUIView: View {
                     HStack {
                         VStack {
                             Button(action: {
-                                // Add cancel button action here
-                                print("Cancel")
+                                
                             }){
                                 Text("Cancel")
                                     .frame(maxWidth: .infinity)
@@ -100,8 +100,7 @@ struct SwiftUIView: View {
                     HStack {
                         VStack {
                             Button(action: {
-                                // Add check-in button action here
-                                print("Check-in")
+                                
                                 delegate?.checkinButtonPressed()
                             }){
                                 Text("Check-in")
