@@ -18,6 +18,8 @@ DormViewControllerDelegate{
 
     var segue :String = ""
     var abhayasiID: String = ""
+    var email: String?
+    var mobile: String?
 
     
     override func viewDidLoad() {
@@ -149,7 +151,14 @@ DormViewControllerDelegate{
         if let destinationVC = segue.destination as? EmailOrMobileViewController,
            segue.identifier == "CheckInSegue" {
             print("Preparing for segue to EmailOrMobileViewController")
-            destinationVC.selectedBatch = getSelectedBatch()      }
+            destinationVC.selectedBatch = getSelectedBatch()
+            if (email != nil) {
+                destinationVC.givenEmail = email
+            }
+            if (mobile != nil){
+                destinationVC.givenMobile = mobile
+            }
+        }
     }
 
     // MARK: - DormViewControllerDelegate method
@@ -182,7 +191,6 @@ extension EntryViewController: UIPickerViewDataSource {
         
         // Check if the selectedRow is within the bounds of the batchOptions array
         if selectedRow >= 0 && selectedRow < batchOptions.count {
-            print ("batch: \(batchOptions[selectedRow])")
             return batchOptions[selectedRow]
         } else {
             return nil // Return nil if no valid selection is made
@@ -218,20 +226,27 @@ extension EntryViewController:
         
         // Enable the startButton only if validID or ValidEmail
         let abhyasiManager = AbhyasiManager(updatedText!)
-        abhayasiID = updatedText!
+        
         if (updatedText != nil) == abhyasiManager.isValidEmail(){
+            email = updatedText!
+            mobile = ""
             startButton.isEnabled = true
             startButton.alpha = 1.0 // Set the alpha to make it normal
             segue = "CheckInSegue"
             
+            
         }
         else if (updatedText != nil) == abhyasiManager.isValidNumber() {
+            mobile = updatedText!
+            print(mobile!)
+            email = ""
                 startButton.isEnabled = true
                 startButton.alpha = 1.0 // Set the alpha to make it normal
             segue = "CheckInSegue"
             
         }
         else if (updatedText != nil) == abhyasiManager.isValidId() {
+                abhayasiID = updatedText!
                 startButton.isEnabled = true
                 startButton.alpha = 1.0 // Set the alpha to make it normal
             segue = "DormSegue"

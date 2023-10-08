@@ -14,7 +14,21 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
             batch = selectedBatch
         }
     }
+    var givenEmail: String? {
+        didSet {
+            // Update batch when selectedBatch changes
+            email = givenEmail
+        }
+    }
+    var givenMobile: String? {
+        didSet {
+            // Update batch when selectedBatch changes
+            mobile = givenMobile
+        }
+    }
     @State var batch: String? = "DefaultBatchError" // Provide a default value
+    @State var email: String? = "DefaultEmailError" //
+    @State var mobile: String? = "DefaultMobileError" //
 
     func checkinButtonPressed() {
         print("debugging: \(selectedBatch ?? "hello")")
@@ -29,9 +43,17 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
             get: { self.selectedBatch ?? "dummy" },
             set: { self.selectedBatch = $0 }
         )
+        let emailBinding = Binding<String>(
+            get: { self.givenEmail ?? "" },
+            set: { self.givenEmail = $0 }
+        )
+        let mobileBinding = Binding<String>(
+            get: { self.givenMobile ?? "" },
+            set: { self.givenMobile = $0 }
+        )
 
         // Create a SwiftUI view with the binding
-        var swiftUIView = SwiftUIView(batch: batchBinding)
+        var swiftUIView = SwiftUIView(batch: batchBinding, email: emailBinding, mobile: mobileBinding)
         swiftUIView.delegate = self
         
         // Embed the SwiftUI view within a UIHostingController
