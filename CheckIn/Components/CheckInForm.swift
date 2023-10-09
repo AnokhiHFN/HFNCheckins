@@ -84,7 +84,6 @@ struct SwiftUIView: View {
                 
                 Section {
                     TextField("Full Name", text: $fullName)
-                    
                     HStack {
                         VStack {
                             Picker("Age", selection: $selectedAgeRange) {
@@ -118,7 +117,6 @@ struct SwiftUIView: View {
                     
                     TextField("Country", text: $country) // Added country field
                 }
-                
                 Section {
                     TextField(mobilePlaceholder, text: $mobile)
                         .disabled(isMobileFieldDisabled)
@@ -131,40 +129,33 @@ struct SwiftUIView: View {
                 
                 Section {
                     HStack {
-                        VStack {
-                            Button(action: {
-                                // Dismiss the current view (SwiftUIView)
-                                presentationMode.wrappedValue.dismiss()
-                            }) {
-                                Text("Cancel")
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color("buttonColor"))
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                            }
-                        }
-                    }
-                    
-                    HStack {
-                        VStack {
-                            Button(action: {
-                                delegate?.checkinButtonPressed()
-                            }){
-                                Text("Check-in")
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color("buttonColor"))
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-
-                            }
-                            .disabled(!isCheckinButtonEnabled)
-                            .opacity(isCheckinButtonEnabled ? 1.0 : 0.5) // Change opacity based on the state// Disable the button based on the state
-                        }
+                            Text("Cancel")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color("buttonColor"))
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .onTapGesture {
+                                    // Dismiss the current view (SwiftUIView)
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                        
+                        
+                        Text("Check-in")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color("buttonColor"))
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .onTapGesture {
+                                    delegate?.checkinButtonPressed()
+                                }
+                                .disabled(!isCheckinButtonEnabled)
+                                .opacity(isCheckinButtonEnabled ? 1.0 : 0.5)
+                                
+                        
                     }
                 }
-                
             }
             .cornerRadius(10)
             .padding(10)
