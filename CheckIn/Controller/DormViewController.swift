@@ -70,7 +70,9 @@ class DormViewController: UIViewController {
         cancelButton.setTitleColor(.white, for: .normal)
         cancelButton.layer.cornerRadius = 10
         // Add a target action for the Cancel button
+        // Add a target action for the Cancel button
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+
         containerView.addSubview(cancelButton)
         
         // Create a button for "CheckIn"
@@ -123,7 +125,10 @@ class DormViewController: UIViewController {
     
     // Function to handle the "Cancel" button tap
     @objc func cancelAction() {
-        // Handle the action when the "Cancel" button is tapped
+        // Dismiss the current view controller and return to the previous screen
+        print("hellooooo")
+        self.navigationController?.popViewController(animated: true)
+
         
     }
     

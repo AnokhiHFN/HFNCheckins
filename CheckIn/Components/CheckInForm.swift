@@ -5,6 +5,7 @@ protocol CheckInFormDelegate: AnyObject {
 }
 
 struct SwiftUIView: View {
+    @Environment(\.presentationMode) var presentationMode
     weak var delegate: CheckInFormDelegate?
     @Binding var batch: String // Use Binding
     @Binding var email: String // Use Binding
@@ -109,9 +110,10 @@ struct SwiftUIView: View {
                     HStack {
                         VStack {
                             Button(action: {
-                                
-                            }){
-                                Text("Cancel")
+                                        // Dismiss the current view (SwiftUIView)
+                                        presentationMode.wrappedValue.dismiss()
+                                    }) {
+                                        Text("Cancel")
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .background(Color("buttonColor"))
