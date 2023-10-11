@@ -9,6 +9,7 @@ DormViewControllerDelegate{
     var emailOrMobileViewController: EmailOrMobileViewController?
     
     let batchPickerView = UIPickerView()
+    let infoTextField = UITextField()
     
     // Create a reference to the Start Check-In button
     let startButton = UIButton(type: .system)
@@ -41,8 +42,6 @@ DormViewControllerDelegate{
 
         view.addSubview(batchPickerView)
         
-        // Create a text field for info
-        let infoTextField = UITextField()
         infoTextField.isUserInteractionEnabled = true
         infoTextField.translatesAutoresizingMaskIntoConstraints = false
         infoTextField.placeholder = "Enter Info"
@@ -132,6 +131,9 @@ DormViewControllerDelegate{
     
     @objc func startCheckIn() {
         // Handle the action when the "Start Check-In" button is tapped
+        infoTextField.text = ""
+        startButton.isEnabled = false
+        startButton.alpha = 0.5
         performSegue(withIdentifier: segue, sender: self)
         
     }
@@ -254,7 +256,7 @@ extension EntryViewController:
         }
         else {
             startButton.isEnabled = false
-            startButton.alpha = 0.5 // Set the alpha to make it pale
+            startButton.alpha = startButton.isEnabled ? 1.0 : 0.5 // Set the alpha to make it pale
             segue = "Invalid"
 
         }
