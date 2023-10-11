@@ -5,6 +5,9 @@ class FinalScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Hide the back button
+        self.navigationItem.setHidesBackButton(true, animated: false)
 
         // Create a UIImageView to display the background image
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)

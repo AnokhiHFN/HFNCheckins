@@ -38,6 +38,11 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the color of the back button to "buttonColor"
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.tintColor = UIColor(named: "EntryTextColor")
+        }
+        
         // Create a SwiftUI view
         let batchBinding = Binding<String>(
             get: { self.selectedBatch ?? "dummy" },

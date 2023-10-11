@@ -15,6 +15,11 @@ class DormViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the color of the back button to "buttonColor"
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.tintColor = UIColor(named: "EntryTextColor")
+        }
 
         // Create a background image view
         let backgroundImage = UIImageView(frame: view.bounds)
