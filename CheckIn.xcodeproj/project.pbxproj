@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58EB2BB1D3D6BE1EEBDE66BA /* Pods_CheckIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 298F1A9FB54DA17D1161F77B /* Pods_CheckIn.framework */; };
 		FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147092AB4B68100A27646 /* AppDelegate.swift */; };
 		FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31470B2AB4B68100A27646 /* SceneDelegate.swift */; };
 		FC3147112AB4B68100A27646 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31470F2AB4B68100A27646 /* Main.storyboard */; };
@@ -20,9 +21,14 @@
 		FCA7CFF22ACB07C9006C93E3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */; };
 		FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */; };
 		FCA7CFFF2ACDB4A5006C93E3 /* DormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */; };
+		FCA7D0032AD7DFE0006C93E3 /* CheckinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7D0022AD7DFE0006C93E3 /* CheckinData.swift */; };
+		FCA7D0192ADC2767006C93E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCA7D0182ADC2767006C93E3 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		298F1A9FB54DA17D1161F77B /* Pods_CheckIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CheckIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3103E2B459C1A46BC1C08734 /* Pods-CheckIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckIn.release.xcconfig"; path = "Target Support Files/Pods-CheckIn/Pods-CheckIn.release.xcconfig"; sourceTree = "<group>"; };
+		E63894B535449AB61F0890AA /* Pods-CheckIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckIn.debug.xcconfig"; path = "Target Support Files/Pods-CheckIn/Pods-CheckIn.debug.xcconfig"; sourceTree = "<group>"; };
 		FC3147062AB4B68100A27646 /* CheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3147092AB4B68100A27646 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC31470B2AB4B68100A27646 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +44,8 @@
 		FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DormViewController.swift; sourceTree = "<group>"; };
+		FCA7D0022AD7DFE0006C93E3 /* CheckinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinData.swift; sourceTree = "<group>"; };
+		FCA7D0182ADC2767006C93E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58EB2BB1D3D6BE1EEBDE66BA /* Pods_CheckIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,8 +63,18 @@
 		571CC185333BB4AC49D82235 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				E63894B535449AB61F0890AA /* Pods-CheckIn.debug.xcconfig */,
+				3103E2B459C1A46BC1C08734 /* Pods-CheckIn.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A8403AB9E9762AE9CB286E68 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				298F1A9FB54DA17D1161F77B /* Pods_CheckIn.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FC3146FD2AB4B68100A27646 = {
@@ -64,6 +83,7 @@
 				FC3147082AB4B68100A27646 /* CheckIn */,
 				FC3147072AB4B68100A27646 /* Products */,
 				571CC185333BB4AC49D82235 /* Pods */,
+				A8403AB9E9762AE9CB286E68 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +98,7 @@
 		FC3147082AB4B68100A27646 /* CheckIn */ = {
 			isa = PBXGroup;
 			children = (
+				FCA7D0182ADC2767006C93E3 /* GoogleService-Info.plist */,
 				FCA7CFF52ACC55A5006C93E3 /* Components */,
 				FC31471D2AB82FA700A27646 /* Model */,
 				FC31471E2AB82FB200A27646 /* View */,
@@ -95,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				FC3147422ABF199A00A27646 /* AbhyasiManager.swift */,
+				FCA7D0022AD7DFE0006C93E3 /* CheckinData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -135,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC31471A2AB4B68100A27646 /* Build configuration list for PBXNativeTarget "CheckIn" */;
 			buildPhases = (
+				D9F2ABE76432F4786C3A1607 /* [CP] Check Pods Manifest.lock */,
 				FC3147022AB4B68100A27646 /* Sources */,
 				FC3147032AB4B68100A27646 /* Frameworks */,
 				FC3147042AB4B68100A27646 /* Resources */,
+				9C0DD84F2F5350E343E64C7C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -187,12 +211,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC3147162AB4B68100A27646 /* LaunchScreen.storyboard in Resources */,
+				FCA7D0192ADC2767006C93E3 /* GoogleService-Info.plist in Resources */,
 				FC3147132AB4B68100A27646 /* Assets.xcassets in Resources */,
 				FC3147112AB4B68100A27646 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9C0DD84F2F5350E343E64C7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CheckIn/Pods-CheckIn-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CheckIn/Pods-CheckIn-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CheckIn/Pods-CheckIn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9F2ABE76432F4786C3A1607 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CheckIn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FC3147022AB4B68100A27646 /* Sources */ = {
@@ -204,6 +271,7 @@
 				FC3147432ABF199A00A27646 /* AbhyasiManager.swift in Sources */,
 				FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */,
 				FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */,
+				FCA7D0032AD7DFE0006C93E3 /* CheckinData.swift in Sources */,
 				FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */,
 				FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */,
 				FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */,
@@ -350,6 +418,7 @@
 		};
 		FC31471B2AB4B68100A27646 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E63894B535449AB61F0890AA /* Pods-CheckIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -368,7 +437,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.anokhi.CheckIn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfn.checkin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -378,6 +447,7 @@
 		};
 		FC31471C2AB4B68100A27646 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3103E2B459C1A46BC1C08734 /* Pods-CheckIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -397,7 +467,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.anokhi.CheckIn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfn.checkin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

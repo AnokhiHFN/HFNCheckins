@@ -1,4 +1,7 @@
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 // Define a protocol for communication between EntryViewController and DormViewController
 protocol EmailOrMobileViewControllerDelegate: AnyObject {
@@ -8,6 +11,7 @@ protocol EmailOrMobileViewControllerDelegate: AnyObject {
 class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
     
     weak var delegate: EmailOrMobileViewControllerDelegate?
+    var checkInType : String = "None"
     var selectedBatch: String? {
         didSet {
             // Update batch when selectedBatch changes
@@ -30,11 +34,54 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
     @State var email: String? = "DefaultEmailError" //
     @State var mobile: String? = "DefaultMobileError" //
 
-    func checkinButtonPressed() {
-        print("debugging: \(selectedBatch ?? "hello")")
-        performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
+    func checkinButtonPressed(with checkInData: CheckInData) {
+        let db = Firestore.firestore()
+        
+        if Auth.auth().currentUser == nil {
+            print("User is not authenticated, attempting to sign in anonymously...")
+            Auth.auth().signInAnonymously { [self] authResult, error in
+                if let error = error {
+                    // Handle the error
+                    print("Error signing in anonymously: \(error.localizedDescription)")
+                } else {
+                    // The user is signed in anonymously
+                    print("Signed In")
+                    
+                    // Now that the user is signed in, you can proceed to write data to Firestore.
+                    writeCheckinData(db: db, batch: checkInData.batch)
+
+                }
+            }
+        } else {
+            // User is already authenticated, proceed to write data.
+            writeCheckinData(db: db, batch: checkInData.batch)
+
+        }
     }
-    
+
+    func writeCheckinData(db: Firestore, batch: String) {
+        let docRef = db.collection("events/202310_october_retreat/checkins").document(batch)
+        let timestamp = FieldValue.serverTimestamp()
+        
+        let data: [String: Any] = [
+            "batch": batch,
+            "timestamp": timestamp
+        ]
+        
+        docRef.setData(data, merge: true) { [self] error in
+            if let error = error {
+                // Handle the error, e.g., show an alert to the user
+                print("Error writing document: \(error)")
+            } else {
+                // Document successfully written
+                print("Document successfully written!")
+                
+                // Continue to your next action, e.g., segue to another screen
+                print("debugging: \(selectedBatch ?? "hello")")
+                performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
