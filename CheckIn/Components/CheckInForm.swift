@@ -1,7 +1,11 @@
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
+import FirebaseFirestore
 
 protocol CheckInFormDelegate: AnyObject {
-    func checkinButtonPressed()
+    func checkinButtonPressed(with checkInData: CheckInData)
 }
 
 @available(iOS 14.0, *)
@@ -148,7 +152,17 @@ struct SwiftUIView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                                 .onTapGesture {
-                                    delegate?.checkinButtonPressed()
+                                    let checkInData = CheckInData(
+                                        batch: batch,
+                                        fullName: fullName,
+                                        gender: gender,
+                                        city: city,
+                                        state: state,
+                                        country: country,
+                                        dorm: dorm
+                                        
+                                    )
+                                    delegate?.checkinButtonPressed(with: checkInData)
                                 }
                                 .disabled(!isCheckinButtonEnabled)
                                 .opacity(isCheckinButtonEnabled ? 1.0 : 0.5)
