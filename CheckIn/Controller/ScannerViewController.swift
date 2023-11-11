@@ -3,6 +3,11 @@ import AVFoundation
 import UIKit
 
 class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
+    // Reference to DormViewController
+    // Closure to handle scanned code
+    var didScanCode: ((String) -> Void)?
+
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
 
@@ -56,13 +61,22 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 
     // Implement the delegate method to handle the scanned QR code or barcode
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        for metadataObject in metadataObjects {
-            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-            guard let stringValue = readableObject.stringValue else { return }
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-
-            // Process the scanned QR code or barcode value (stringValue)
-            print("Scanned Code: \(stringValue)")
+        guard let metadataObject = metadataObjects.first else {
+            // If no metadata objects are found, do nothing
+            return
         }
+
+        guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
+        guard let stringValue = readableObject.stringValue else { return }
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+
+        // Process the scanned QR code or barcode value (stringValue)
+        print("Scanned Code: \(stringValue)")
+        
+        // Call the closure to pass the scanned code
+        didScanCode?(stringValue)
+
+        // Stop the capture session after processing the first code
+        captureSession.stopRunning()
     }
 }
