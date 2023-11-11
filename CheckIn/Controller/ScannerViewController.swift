@@ -1,4 +1,4 @@
-// Example using AVFoundation
+// Example using AVFoundation for QR code and barcode scanning
 import AVFoundation
 import UIKit
 
@@ -34,7 +34,8 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             captureSession.addOutput(metadataOutput)
 
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
+            // Include both QR code and barcode types
+            metadataOutput.metadataObjectTypes = [.qr, .ean8, .ean13, .pdf417, .upce, .code39, .code93, .code128, .aztec, .interleaved2of5, .itf14, .dataMatrix]
         } else {
             failed()
             return
@@ -53,16 +54,15 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         print("Failed to initialize the camera")
     }
 
-    // Implement the delegate method to handle the scanned QR code
+    // Implement the delegate method to handle the scanned QR code or barcode
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        if let metadataObject = metadataObjects.first {
+        for metadataObject in metadataObjects {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            captureSession.stopRunning()
 
-            // Process the scanned QR code value (stringValue)
-            print("Scanned QR Code: \(stringValue)")
+            // Process the scanned QR code or barcode value (stringValue)
+            print("Scanned Code: \(stringValue)")
         }
     }
 }
