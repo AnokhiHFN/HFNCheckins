@@ -8,5 +8,5 @@ target 'CheckIn' do
   # Pods for CheckIn
  pod 'FirebaseAuth'
  pod 'FirebaseFirestore'
-
+ pod 'IQKeyboardManager' #iOS8 and later
 end
