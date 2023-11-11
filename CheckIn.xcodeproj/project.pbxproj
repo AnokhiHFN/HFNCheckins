@@ -23,6 +23,7 @@
 		FCA7CFFF2ACDB4A5006C93E3 /* DormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */; };
 		FCA7D0032AD7DFE0006C93E3 /* CheckinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7D0022AD7DFE0006C93E3 /* CheckinData.swift */; };
 		FCA7D0192ADC2767006C93E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCA7D0182ADC2767006C93E3 /* GoogleService-Info.plist */; };
+		FCB639822AFFC2C3001B2502 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB639812AFFC2C3001B2502 /* ScannerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DormViewController.swift; sourceTree = "<group>"; };
 		FCA7D0022AD7DFE0006C93E3 /* CheckinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinData.swift; sourceTree = "<group>"; };
 		FCA7D0182ADC2767006C93E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCB639812AFFC2C3001B2502 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				FC3147462AC41B0200A27646 /* EmailOrMobileViewController.swift */,
 				FC3147522AC6099300A27646 /* FinalScreenViewController.swift */,
 				FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */,
+				FCB639812AFFC2C3001B2502 /* ScannerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */,
 				FCA7D0032AD7DFE0006C93E3 /* CheckinData.swift in Sources */,
 				FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */,
+				FCB639822AFFC2C3001B2502 /* ScannerViewController.swift in Sources */,
 				FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */,
 				FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */,
 				FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */,
