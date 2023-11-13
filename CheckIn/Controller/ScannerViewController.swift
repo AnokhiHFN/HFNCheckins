@@ -5,6 +5,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     
     // Reference to DormViewController
     var dormViewController = DormViewController()
+    var selectedBatch: String?
     // Closure to handle scanned code
     var didScanCode: ((String) -> Void)?
 
@@ -98,6 +99,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             if let dormViewController = segue.destination as? DormViewController {
                 // Pass the scanned code to DormViewController
                 dormViewController.abhyasiID = self.dormViewController.abhyasiID
+                dormViewController.selectedBatch = selectedBatch
             }
         }
     }

@@ -165,6 +165,11 @@ BatchSelectionDelegate{
                 destinationVC.givenMobile = mobile
             }
         }
+        if segue.identifier == "EntryToScanner" {
+                if let scannerViewController = segue.destination as? QRScannerViewController {
+                    scannerViewController.selectedBatch = getSelectedBatch() // Assuming selectedBatch is a property in QRScannerViewController
+                }
+            }
     }
 
     // MARK: - DormViewControllerDelegate method
