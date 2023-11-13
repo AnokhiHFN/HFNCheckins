@@ -9,13 +9,16 @@ protocol DormViewControllerDelegate: AnyObject {
 
 class DormViewController: UIViewController, UITextFieldDelegate {
 
-
+    // Property to store the scanned code
+    var scannedCode: String?
     // Define a delegate property to communicate with DormViewController
     weak var delegate: DormViewControllerDelegate?
     let infoTextField = UITextField()
     // Property to store the selected batch value
-    var selectedBatch: String?
-    var abhyasiID: String?
+    //var selectedBatch: String?
+    var selectedBatch: String? = "hello"
+    //var abhyasiID: String?
+    var abhyasiID: String? = "hello2"
     
     override func viewDidLoad() {
         super.viewDidLoad()

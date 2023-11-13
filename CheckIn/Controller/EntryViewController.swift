@@ -142,7 +142,8 @@ DormViewControllerDelegate{
     @objc func scanAction() {
         // Create an instance of the ScannerViewController
         let scannerVC = QRScannerViewController()
-        present(scannerVC, animated: true, completion: nil)
+        //present(scannerVC, animated: true, completion: nil)
+        performSegue(withIdentifier: "EntryToScanner", sender: self)
 
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

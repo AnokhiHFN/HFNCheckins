@@ -1,4 +1,3 @@
-// Example using AVFoundation for QR code and barcode scanning
 import AVFoundation
 import UIKit
 
@@ -51,7 +50,10 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
 
-        captureSession.startRunning()
+        // Start the capture session on a background thread
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession.startRunning()
+        }
     }
 
     func failed() {
@@ -59,6 +61,8 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         print("Failed to initialize the camera")
     }
 
+    // Implement the delegate method to handle the scanned QR code or barcode
+    // Implement the delegate method to handle the scanned QR code or barcode
     // Implement the delegate method to handle the scanned QR code or barcode
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard let metadataObject = metadataObjects.first else {
@@ -72,11 +76,19 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 
         // Process the scanned QR code or barcode value (stringValue)
         print("Scanned Code: \(stringValue)")
-        
-        // Call the closure to pass the scanned code
-        didScanCode?(stringValue)
 
         // Stop the capture session after processing the first code
         captureSession.stopRunning()
+
+        // Delay the presentation of DormViewController to ensure captureSession is fully stopped
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            // Present DormViewController
+            let dormVC = DormViewController()
+            //dormVC.abhyasiID = "hello"
+            //dormVC.selectedBatch = "not sure"
+            self?.performSegue(withIdentifier: "ScannerToDorm", sender: self)
+            //self!.present(dormVC, animated: true, completion: nil)
+        }
     }
+
 }
