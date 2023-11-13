@@ -1,24 +1,27 @@
 import UIKit
 
 // Define a protocol for communication between EntryViewController and DormViewController
-protocol DormViewControllerDelegate: AnyObject {
+protocol BatchSelectionDelegate: AnyObject {
     func didSelectBatch(_ batch: String)
+}
+
+protocol ScannerDelegate: AnyObject {
+    func didScanCode(_ info: String)
 }
 
 
 
 class DormViewController: UIViewController, UITextFieldDelegate {
 
-    // Property to store the scanned code
-    var scannedCode: String?
     // Define a delegate property to communicate with DormViewController
-    weak var delegate: DormViewControllerDelegate?
+    weak var delegate: BatchSelectionDelegate?
+    weak var scannerDelegate: ScannerDelegate?
     let infoTextField = UITextField()
     // Property to store the selected batch value
     //var selectedBatch: String?
     var selectedBatch: String? = "hello"
     //var abhyasiID: String?
-    var abhyasiID: String? = "hello2"
+    var abhyasiID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

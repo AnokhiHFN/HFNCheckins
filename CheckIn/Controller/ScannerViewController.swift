@@ -1,9 +1,10 @@
 import AVFoundation
 import UIKit
 
-class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, ScannerDelegate {
     
     // Reference to DormViewController
+    var dormViewController = DormViewController()
     // Closure to handle scanned code
     var didScanCode: ((String) -> Void)?
 
@@ -76,19 +77,34 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 
         // Process the scanned QR code or barcode value (stringValue)
         print("Scanned Code: \(stringValue)")
+        didScanCode(stringValue)
 
         // Stop the capture session after processing the first code
         captureSession.stopRunning()
 
         // Delay the presentation of DormViewController to ensure captureSession is fully stopped
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            // Present DormViewController
-            let dormVC = DormViewController()
             //dormVC.abhyasiID = "hello"
             //dormVC.selectedBatch = "not sure"
             self?.performSegue(withIdentifier: "ScannerToDorm", sender: self)
             //self!.present(dormVC, animated: true, completion: nil)
         }
     }
-
+    
+    // This method is called just before the segue is performed
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ScannerToDorm" {
+            // Check if the destination view controller is DormViewController
+            if let dormViewController = segue.destination as? DormViewController {
+                // Pass the scanned code to DormViewController
+                dormViewController.abhyasiID = self.dormViewController.abhyasiID
+            }
+        }
+    }
+    
+    // Implement the delegate method to pass the scanned code to DormViewController
+    func didScanCode(_ code: String) {
+        // Handle the scanned code as needed
+        dormViewController.abhyasiID = code
+    }
 }

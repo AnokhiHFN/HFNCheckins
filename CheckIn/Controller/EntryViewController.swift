@@ -1,7 +1,7 @@
 import UIKit
 
 class EntryViewController: UIViewController,EmailOrMobileViewControllerDelegate,
-DormViewControllerDelegate{
+BatchSelectionDelegate{
 
     
 
