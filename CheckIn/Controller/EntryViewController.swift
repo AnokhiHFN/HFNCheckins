@@ -1,7 +1,7 @@
 import UIKit
 
 class EntryViewController: UIViewController,EmailOrMobileViewControllerDelegate,
-DormViewControllerDelegate{
+BatchSelectionDelegate{
 
     
 
@@ -140,8 +140,12 @@ DormViewControllerDelegate{
     
     // Function to handle the "Scan" button tap
     @objc func scanAction() {
+        // Create an instance of the ScannerViewController
+        let scannerVC = QRScannerViewController()
+        //present(scannerVC, animated: true, completion: nil)
+        performSegue(withIdentifier: "EntryToScanner", sender: self)
+
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? DormViewController {
             // Set the delegate and dormViewController properties
@@ -161,6 +165,11 @@ DormViewControllerDelegate{
                 destinationVC.givenMobile = mobile
             }
         }
+        if segue.identifier == "EntryToScanner" {
+                if let scannerViewController = segue.destination as? QRScannerViewController {
+                    scannerViewController.selectedBatch = getSelectedBatch() // Assuming selectedBatch is a property in QRScannerViewController
+                }
+            }
     }
 
     // MARK: - DormViewControllerDelegate method
@@ -264,3 +273,4 @@ extension EntryViewController:
         return true
     }
 }
+

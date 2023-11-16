@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g97-D0-4JE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g97-D0-4JE">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,16 +23,36 @@
                     <connections>
                         <segue destination="L72-if-qbE" kind="show" identifier="CheckInSegue" id="cyb-1P-PVd"/>
                         <segue destination="Aew-7y-TTk" kind="show" identifier="DormSegue" id="4Ud-kd-mH8"/>
+                        <segue destination="5C6-8H-Bmp" kind="show" identifier="EntryToScanner" id="qk2-Qj-sGv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ka-nh-ufM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2725.1162790697672" y="-194.42060085836911"/>
         </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="p4e-UZ-h0s">
+            <objects>
+                <viewController id="5C6-8H-Bmp" customClass="QRScannerViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q9H-Q8-L4M">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="CuX-CW-66p"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="R75-Uw-N41"/>
+                    <connections>
+                        <segue destination="Aew-7y-TTk" kind="show" identifier="ScannerToDorm" id="BJd-i6-9ga"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ae-oq-iab" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3709" y="-1403"/>
+        </scene>
         <!--Dorm View Controller-->
         <scene sceneID="1bj-09-O58">
             <objects>
-                <viewController id="Aew-7y-TTk" customClass="DormViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DormViewController" id="Aew-7y-TTk" customClass="DormViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wjg-SE-Slu">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,6 +146,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="eXM-vp-s6w"/>
+        <segue reference="BJd-i6-9ga"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Background" width="1290" height="2796"/>

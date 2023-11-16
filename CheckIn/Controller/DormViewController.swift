@@ -1,20 +1,32 @@
 import UIKit
 
 // Define a protocol for communication between EntryViewController and DormViewController
-protocol DormViewControllerDelegate: AnyObject {
+protocol BatchSelectionDelegate: AnyObject {
     func didSelectBatch(_ batch: String)
 }
 
-class DormViewController: UIViewController {
+protocol ScannerDelegate: AnyObject {
+    func didScanCode(_ info: String)
+}
+
+
+
+class DormViewController: UIViewController, UITextFieldDelegate {
 
     // Define a delegate property to communicate with DormViewController
-    weak var delegate: DormViewControllerDelegate?
+    weak var delegate: BatchSelectionDelegate?
+    weak var scannerDelegate: ScannerDelegate?
+    let infoTextField = UITextField()
     // Property to store the selected batch value
-    var selectedBatch: String?
+    //var selectedBatch: String?
+    var selectedBatch: String? = "hello"
+    //var abhyasiID: String?
     var abhyasiID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        infoTextField.delegate = self
         
         // Set the color of the back button to "buttonColor"
         if let navigationBar = self.navigationController?.navigationBar {
@@ -59,7 +71,7 @@ class DormViewController: UIViewController {
         containerView.addSubview(batchLabel)
         
         // Create an info text field with header "Dorm and Berth Allocations"
-        let infoTextField = UITextField()
+        
         infoTextField.isUserInteractionEnabled = true
         infoTextField.translatesAutoresizingMaskIntoConstraints = false
         infoTextField.placeholder = "Dorm and Berth Allocations"
@@ -128,6 +140,25 @@ class DormViewController: UIViewController {
         ])
     }
     
+    // Implement the UITextFieldDelegate method to capture the changing text in real-time
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            print("Updated text in infoTextField: \(updatedText)")
+            // You can use the updatedText as needed.
+        }
+        return true
+    }
+
+    // Implement the UITextFieldDelegate method to capture the final entered text
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // Access the entered text using textField.text
+        if let enteredText = textField.text {
+            print("Entered text from infoTextField: \(enteredText)")
+            // You can use the enteredText as needed, e.g., store it in a variable or send it to another function.
+        }
+    }
+    
     // Function to handle the "Cancel" button tap
     @objc func cancelAction() {
         // Dismiss the current view controller and return to the previous screen
@@ -140,7 +171,10 @@ class DormViewController: UIViewController {
     // Function to handle the "CheckIn" button tap
     @objc func checkInAction() {
         // Handle the action when the "CheckIn" button is tapped
-       
+        if let enteredText = infoTextField.text {
+            print("Final entered text from infoTextField: \(enteredText)")
+            // You can use the enteredText as needed, e.g., store it in a variable or send it to another function.
+        }
         performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
     }
 }
