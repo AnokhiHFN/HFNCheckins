@@ -52,7 +52,8 @@ BatchSelectionDelegate{
         // Create a button for starting check-in
         startButton.isUserInteractionEnabled = true
         startButton.translatesAutoresizingMaskIntoConstraints = false
-        startButton.setTitle("Start Check-In", for: .normal)
+        startButton.setTitle("Please Start", for: .normal)
+        startButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         startButton.backgroundColor = UIColor(named: "buttonColor")
         startButton.setTitleColor(.white, for: .normal)
         startButton.layer.cornerRadius = 10
