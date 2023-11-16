@@ -11,6 +11,14 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    
+    let overlayView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderColor = UIColor.green.cgColor
+        view.layer.borderWidth = 2.0
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +59,25 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        
+        setupOverlayView()
 
         // Start the capture session on a background thread
         DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
         }
+    }
+    
+    func setupOverlayView() {
+        view.addSubview(overlayView)
+
+        // Set up constraints for the overlay view
+        NSLayoutConstraint.activate([
+            overlayView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            overlayView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            overlayView.widthAnchor.constraint(equalToConstant: 200), // Adjust the width as needed
+            overlayView.heightAnchor.constraint(equalToConstant: 200) // Adjust the height as needed
+        ])
     }
 
     func failed() {
