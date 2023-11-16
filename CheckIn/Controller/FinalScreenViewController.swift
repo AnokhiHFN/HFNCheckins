@@ -56,7 +56,7 @@ class FinalScreenViewController: UIViewController {
 
         // Create a blue button
         let returnButton = UIButton(type: .system)
-        returnButton.setTitle("Main Screen", for: .normal)
+        returnButton.setTitle("That's All", for: .normal)
         returnButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         returnButton.setTitleColor(.white, for: .normal)
         returnButton.backgroundColor = UIColor(named: "buttonColor") // Set the background color to "buttonholer"
