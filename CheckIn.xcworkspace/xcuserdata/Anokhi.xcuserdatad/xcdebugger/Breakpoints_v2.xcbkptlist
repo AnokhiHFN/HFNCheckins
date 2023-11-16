@@ -32,8 +32,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
             endingLineNumber = "106"
-            landmarkName = "QRScannerViewController"
-            landmarkType = "3">
+            landmarkName = "metadataOutput(_:didOutput:from:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "0347999B-AF1F-4E77-9186-D7E2FDBD05EF - 440e537a3f0797f2"

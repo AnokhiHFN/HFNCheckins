@@ -15,7 +15,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     let overlayView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderColor = UIColor.green.cgColor
+        view.layer.borderColor = UIColor(named: "buttonColor")?.cgColor
         view.layer.borderWidth = 2.0
         return view
     }()
