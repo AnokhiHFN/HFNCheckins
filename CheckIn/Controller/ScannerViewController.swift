@@ -141,6 +141,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     // Implement the delegate method to pass the scanned code to DormViewController
     func didScanCode(_ code: String) {
         // Handle the scanned code as needed
+
         dormViewController.abhyasiID = code
     }
     
