@@ -5,143 +5,170 @@ protocol QRCodeDelegate: AnyObject {
     func didScanQRCode(_ info: String)
 }
 
-class CheckBoxView: UIView {
-    var checkBox: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "square"), for: .normal)
-        button.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
-        return button
-    }()
+class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    var nameLabel: UILabel = {
+    var info: String? {
+        didSet {
+            updateTitle()
+            updateSubTitle()
+            updateAbhyasiDetailsArray()
+        }
+    }
+    
+    var pnr: String? {
+        guard let info = info, let secondComponent = info.components(separatedBy: "|").dropFirst().first else { return nil }
+        let componentsAfterSecondPipe = info.components(separatedBy: "|")
+                                            .dropFirst(2)
+                                            .joined(separator: "|")
+        let pnrComponents = componentsAfterSecondPipe.components(separatedBy: ";")
+        return pnrComponents.first
+    }
+    
+    var abhyasis: String? {
+        guard let info = info, let secondComponent = info.components(separatedBy: "|").dropFirst().first else { return nil }
+        let componentsAfterSecondPipe = info.components(separatedBy: "|")
+                                            .dropFirst(2)
+                                            .joined(separator: "|")
+        let pnrComponents = componentsAfterSecondPipe.components(separatedBy: ";")
+        return pnrComponents.dropFirst().joined(separator: ";")
+    }
+
+    var titleText: String? {
+        guard let info = info else { return nil }
+        let components = info.components(separatedBy: "|")
+        return components.first
+    }
+
+    var subTitleText: String? {
+        guard let info = info, let secondComponent = info.components(separatedBy: "|").dropFirst().first else { return nil }
+        return secondComponent
+    }
+
+    var titleLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        return label
+    }()
+
+    let subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
-    var isChecked: Bool {
-        return checkBox.isSelected
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupUI()
-    }
-
-    private func setupUI() {
-        addSubview(checkBox)
-        addSubview(nameLabel)
-
-        checkBox.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            checkBox.leadingAnchor.constraint(equalTo: leadingAnchor),
-            checkBox.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: checkBox.trailingAnchor, constant: 8),
-            nameLabel.topAnchor.constraint(equalTo: topAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
-
-        checkBox.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
-    }
-
-    @objc private func checkBoxTapped() {
-        checkBox.isSelected.toggle()
-    }
-}
-class QRViewController: UIViewController {
-
-    var info: String? {
-        didSet {
-            updateCheckboxes()
-        }
-    }
-
-    var checkboxViews: [CheckBoxView] = []
-    
-    let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
+    var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
+
+    var abhyasiDetailsArray: [AbhyasiDetails] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Create a UIImageView to display the background image
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "Background") // Replace "Background" with the actual image name
-
-        // Ensure the background image scales correctly
-        backgroundImage.contentMode = .scaleAspectFill
-
-        // Add the background image view as the main view
-        view.addSubview(backgroundImage)
+        print(abhyasis)
         setupUI()
     }
-
+    
     private func setupUI() {
-        view.addSubview(scrollView)
+            view.addSubview(titleLabel)
+            view.addSubview(subTitleLabel)
+            view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
+                    titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+                    titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    
+                    subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+                    subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    
+                    tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                    tableView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 16),
+                    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                ])
 
-        // Assuming you have a vertical stack view to contain the checkboxes
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        scrollView.addSubview(stackView)
-
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32) // Adjust the constant based on your needs
-        ])
-
-        // Example: Create and add CheckboxViews for each data block
-        for _ in 1...20 { // Adjust based on the number of data blocks
-            let checkboxView = CheckBoxView()
-            stackView.addArrangedSubview(checkboxView)
-            checkboxViews.append(checkboxView)
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         }
-
-        updateCheckboxes()
-    }
-
-    private func updateCheckboxes() {
+    
+    private func updateAbhyasiDetailsArray() {
         guard let info = info else { return }
 
-        let dataBlocks = info.components(separatedBy: "|")
+        // Extract data blocks using ";" as the separator
+        let dataBlocks = info.components(separatedBy: ";")
 
-        for (index, checkboxView) in checkboxViews.enumerated() {
-            // Adjust the range based on the structure of your data
-            let startIndex = index * 4
-            let endIndex = startIndex + 3
+        // Filter out any empty strings
+        let filteredDataBlocks = dataBlocks.filter { !$0.isEmpty }
 
-            if endIndex < dataBlocks.count {
-                // Example: Display PNR, ID, batch, and Name in the checkbox
-                checkboxView.nameLabel.text = "PNR: \(dataBlocks[startIndex + 2])\nID: \(dataBlocks[startIndex + 3])\nBatch: \(dataBlocks[startIndex + 4])\nName: \(dataBlocks[startIndex + 5])"
-                checkboxView.checkBox.isSelected = false // Adjust based on your logic
-                checkboxView.isHidden = false
-            } else {
-                // Hide checkbox views that don't have enough data
-                checkboxView.isHidden = true
-            }
+        // Parse each data block into AbhyasiDetails and update the array
+        abhyasiDetailsArray = filteredDataBlocks.compactMap { dataBlock in
+            let components = dataBlock.components(separatedBy: "|")
+            guard components.count == 4 else { return nil } // Ensure correct format
+
+            return AbhyasiDetails(RID: components[0].trimmingCharacters(in: .whitespacesAndNewlines),
+                                  batch: components[1].trimmingCharacters(in: .whitespacesAndNewlines),
+                                  AID: components[2].trimmingCharacters(in: .whitespacesAndNewlines),
+                                  name: components[3].trimmingCharacters(in: .whitespacesAndNewlines))
         }
+
+        // Reload the table view to reflect the changes
+        tableView.reloadData()
+    }
+    
+    // MARK: - UITableViewDataSource
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return abhyasiDetailsArray.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let details = abhyasiDetailsArray[indexPath.row]
+        cell.textLabel?.text = "RID: \(details.RID) | Batch: \(details.batch) | AID: \(details.AID) | Name: \(details.name)"
+        return cell
+    }
+
+    private func setupTitle() {
+        view.addSubview(titleLabel)
+
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+
+        updateTitle()
+    }
+
+    private func setupSubTitle() {
+        view.addSubview(subTitleLabel)
+
+        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+
+        updateSubTitle()
+    }
+
+    private func updateTitle() {
+        titleLabel.text = "\(titleText ?? "N/A")"
+    }
+
+    private func updateSubTitle() {
+        subTitleLabel.text = "\(subTitleText ?? "N/A")"
     }
 }
 
