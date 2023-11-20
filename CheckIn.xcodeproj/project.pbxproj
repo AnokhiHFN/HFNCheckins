@@ -18,6 +18,7 @@
 		FC3147492AC59E3700A27646 /* CheckInForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147482AC59E3700A27646 /* CheckInForm.swift */; };
 		FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147522AC6099300A27646 /* FinalScreenViewController.swift */; };
 		FC3147552AC6DA3000A27646 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3147542AC6DA3000A27646 /* Confetti.swift */; };
+		FC69CCCA2B07CF8900CA1AC2 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC69CCC92B07CF8900CA1AC2 /* QRViewController.swift */; };
 		FCA7CFF22ACB07C9006C93E3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */; };
 		FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */; };
 		FCA7CFFF2ACDB4A5006C93E3 /* DormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */; };
@@ -42,6 +43,7 @@
 		FC3147482AC59E3700A27646 /* CheckInForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInForm.swift; sourceTree = "<group>"; };
 		FC3147522AC6099300A27646 /* FinalScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScreenViewController.swift; sourceTree = "<group>"; };
 		FC3147542AC6DA3000A27646 /* Confetti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
+		FC69CCC92B07CF8900CA1AC2 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DormViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				FC3147522AC6099300A27646 /* FinalScreenViewController.swift */,
 				FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */,
 				FCB639812AFFC2C3001B2502 /* ScannerViewController.swift */,
+				FC69CCC92B07CF8900CA1AC2 /* QRViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				FCB639822AFFC2C3001B2502 /* ScannerViewController.swift in Sources */,
 				FC3147472AC41B0200A27646 /* EmailOrMobileViewController.swift in Sources */,
 				FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */,
+				FC69CCCA2B07CF8900CA1AC2 /* QRViewController.swift in Sources */,
 				FC31470C2AB4B68100A27646 /* SceneDelegate.swift in Sources */,
 				FC3147492AC59E3700A27646 /* CheckInForm.swift in Sources */,
 			);
