@@ -90,6 +90,9 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             view.addSubview(titleLabel)
             view.addSubview(subTitleLabel)
             view.addSubview(tableView)
+        
+        tableView.layer.cornerRadius = 10  // Adjust the corner radius as needed
+        tableView.layer.masksToBounds = true
 
         NSLayoutConstraint.activate([
                     titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -104,7 +107,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     tableView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 16),
                     tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -260)
                 ])
 
             tableView.delegate = self
