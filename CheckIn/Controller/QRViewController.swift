@@ -71,6 +71,17 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the color of the back button to "buttonColor"
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.tintColor = UIColor(named: "EntryTextColor")
+        }
+
+        // Create a background image view
+        let backgroundImage = UIImageView(frame: view.bounds)
+        backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
+        backgroundImage.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImage)
         print(abhyasis)
         setupUI()
     }
@@ -89,9 +100,10 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
                     subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                    // Adjust the leading and trailing constraints for the tableView
+                    tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     tableView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 16),
-                    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                 ])
 
@@ -145,14 +157,20 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Set numberOfLines to 0 to allow multiline text
         cell.textLabel?.numberOfLines = 0
         
+        // Adjust leading and trailing constraints for increased padding
         cell.textLabel?.text = """
             Name: \(details.name)
             Batch: \(details.batch)
             AID: \(details.AID)
             RID: \(details.RID)
         """
+        
+        // Adjust the content view's layoutMargins to add padding
+        cell.contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        
         return cell
     }
+
 
     private func setupTitle() {
         view.addSubview(titleLabel)
