@@ -98,6 +98,10 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             tableView.delegate = self
             tableView.dataSource = self
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        // Set the estimatedRowHeight and rowHeight to automatically adjust the cell height
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
         }
     
     private func updateAbhyasiDetailsArray() {
@@ -129,11 +133,24 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return abhyasiDetailsArray.count
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let details = abhyasiDetailsArray[indexPath.row]
-        cell.textLabel?.text = "RID: \(details.RID) | Batch: \(details.batch) | AID: \(details.AID) | Name: \(details.name)"
+        
+        // Set numberOfLines to 0 to allow multiline text
+        cell.textLabel?.numberOfLines = 0
+        
+        cell.textLabel?.text = """
+            Name: \(details.name)
+            Batch: \(details.batch)
+            AID: \(details.AID)
+            RID: \(details.RID)
+        """
         return cell
     }
 
