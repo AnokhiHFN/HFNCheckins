@@ -93,6 +93,8 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         tableView.layer.cornerRadius = 10  // Adjust the corner radius as needed
         tableView.layer.masksToBounds = true
+        tableView.backgroundColor = UIColor.clear
+        tableView.backgroundView = nil // Remove any background view
 
         NSLayoutConstraint.activate([
                     titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -155,7 +157,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let details = abhyasiDetailsArray[indexPath.row]
+        let details = abhyasiDetailsArray[indexPath.section]
         
         // Set numberOfLines to 0 to allow multiline text
         cell.textLabel?.numberOfLines = 0
@@ -170,7 +172,10 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         // Adjust the content view's layoutMargins to add padding
         cell.contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-        
+        // Set the frame for the imageView
+        cell.imageView?.frame = cell.frame.offsetBy(dx: 10, dy: 10)
+        cell.layer.borderColor = CGColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        cell.layer.borderWidth = 3
         return cell
     }
 
