@@ -72,6 +72,9 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set allowsMultipleSelection to true
+        tableView.allowsMultipleSelection = true
+        
         // Set the color of the back button to "buttonColor"
         if let navigationBar = self.navigationController?.navigationBar {
             navigationBar.tintColor = UIColor(named: "EntryTextColor")
@@ -156,38 +159,42 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let details = abhyasiDetailsArray[indexPath.section]
-        
-        // Set numberOfLines to 0 to allow multiline text
-        cell.textLabel?.numberOfLines = 0
-        
-        // Adjust leading and trailing constraints for increased padding
-        cell.textLabel?.text = """
-            Name: \(details.name)
-            Batch: \(details.batch)
-            AID: \(details.AID)
-            RID: \(details.RID)
-        """
-        
-        // Adjust the content view's layoutMargins to add padding
-        cell.contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-        // Set the frame for the imageView
-        cell.imageView?.frame = cell.frame.offsetBy(dx: 10, dy: 10)
-        cell.layer.borderColor = CGColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        cell.layer.borderWidth = 3
-        
-        // Add clickable checkbox to the top right corner
-        let checkboxButton = UIButton(type: .system)
-        checkboxButton.setImage(UIImage(systemName: "square"), for: .normal)
-        checkboxButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
-        checkboxButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
-        checkboxButton.frame = CGRect(x: cell.bounds.width - 50, y: -30, width: 40, height: 20)
-        checkboxButton.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
-        cell.addSubview(checkboxButton)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let details = abhyasiDetailsArray[indexPath.row]
 
-        return cell
+            // Set numberOfLines to 0 to allow multiline text
+            cell.textLabel?.numberOfLines = 0
+
+            cell.textLabel?.text = """
+                Name: \(details.name)
+                Batch: \(details.batch)
+                AID: \(details.AID)
+                RID: \(details.RID)
+            """
+
+            return cell
+        }
+    
+    
+    // Handle cell selection
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Handle selection as needed
+        if let cell = tableView.cellForRow(at: indexPath) {
+            // Access the selected cell
+            cell.contentView.backgroundColor = UIColor(named: "formColor") ?? UIColor.systemBlue
+        }
     }
+
+    // Handle cell deselection
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        // Handle deselection as needed
+        if let cell = tableView.cellForRow(at: indexPath) {
+            // Access the deselected cell
+            cell.contentView.backgroundColor = UIColor.white // Change background color, or perform other actions
+        }
+    }
+
+    
     
     // Checkbox tap action
     @objc func checkboxTapped(_ sender: UIButton) {
