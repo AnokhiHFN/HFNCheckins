@@ -94,7 +94,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.setTitleColor(.white, for: .normal) // Set text color to white
 
-                cancelButton.backgroundColor = UIColor(named: "SystemButtoncolor") // Set the color for "Test"
+                cancelButton.backgroundColor = UIColor(named: "buttonColor") // Set the color for "Test"
         cancelButton.layer.cornerRadius = 15 // Adjust the corner radius as needed
                 cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
                 view.addSubview(cancelButton)
@@ -104,7 +104,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 checkInButton.setTitle("Check In", for: .normal)
         checkInButton.setTitleColor(.white, for: .normal) // Set text color to white
 
-                checkInButton.backgroundColor = UIColor(named: "SystemButtoncolor") // Set the color for "Test"
+                checkInButton.backgroundColor = UIColor(named: "buttonColor") // Set the color for "Test"
         checkInButton.layer.cornerRadius = 15 // Adjust the corner radius as needed
         checkInButton.alpha = 0.5 // Set initial alpha to half
         checkInButton.isEnabled = false // Make the button initially inactive
