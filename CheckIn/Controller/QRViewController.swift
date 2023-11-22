@@ -91,12 +91,20 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Add Cancel button
                 let cancelButton = UIButton(type: .system)
                 cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitleColor(.white, for: .normal) // Set text color to white
+
+                cancelButton.backgroundColor = UIColor(named: "SystemButtoncolor") // Set the color for "Test"
+        cancelButton.layer.cornerRadius = 15 // Adjust the corner radius as needed
                 cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
                 view.addSubview(cancelButton)
 
                 // Add CheckIn button
                 let checkInButton = UIButton(type: .system)
                 checkInButton.setTitle("Check In", for: .normal)
+        checkInButton.setTitleColor(.white, for: .normal) // Set text color to white
+
+                checkInButton.backgroundColor = UIColor(named: "SystemButtoncolor") // Set the color for "Test"
+        checkInButton.layer.cornerRadius = 15 // Adjust the corner radius as needed
                 checkInButton.addTarget(self, action: #selector(checkInButtonTapped), for: .touchUpInside)
                 view.addSubview(checkInButton)
 
@@ -108,10 +116,14 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     cancelButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -8), // Adjust as needed
                     cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
+                    cancelButton.widthAnchor.constraint(equalToConstant: 120), // Adjust the width as needed
+                    cancelButton.heightAnchor.constraint(equalToConstant: 40), // Adjust the height as needed
 
                     checkInButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 8), // Adjust as needed
                     checkInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    checkInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180)
+                    checkInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
+                    checkInButton.widthAnchor.constraint(equalToConstant: 120), // Adjust the width as needed
+                    checkInButton.heightAnchor.constraint(equalToConstant: 40), // Adjust the height as needed
                 ])
     }
     
