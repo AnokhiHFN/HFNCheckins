@@ -113,6 +113,12 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 ])
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "QRToFinal" {
+            print("we will be going to the final screen now")
+        }
+    }
+    
     // Handle Cancel button tap
     @objc func cancelButtonTapped() {
         // Implement Cancel button action
@@ -123,6 +129,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @objc func checkInButtonTapped() {
         // Implement Check In button action
         print("Check In button tapped")
+        performSegue(withIdentifier: "QRToFinal", sender: self)
     }
     
     private func setupUI() {
