@@ -176,7 +176,23 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         cell.imageView?.frame = cell.frame.offsetBy(dx: 10, dy: 10)
         cell.layer.borderColor = CGColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
         cell.layer.borderWidth = 3
+        
+        // Add clickable checkbox to the top right corner
+        let checkboxButton = UIButton(type: .system)
+        checkboxButton.setImage(UIImage(systemName: "square"), for: .normal)
+        checkboxButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        checkboxButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
+        checkboxButton.frame = CGRect(x: cell.bounds.width - 50, y: -30, width: 40, height: 20)
+        checkboxButton.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
+        cell.addSubview(checkboxButton)
+
         return cell
+    }
+    
+    // Checkbox tap action
+    @objc func checkboxTapped(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        // Handle checkbox tap action as needed
     }
 
 
