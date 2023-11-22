@@ -138,6 +138,22 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @objc func checkInButtonTapped() {
         // Implement Check In button action
         print("Check In button tapped")
+        
+        // Print details of selected cells
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+            for indexPath in selectedRows {
+                let details = abhyasiDetailsArray[indexPath.row]
+                print("Selected Cell Details:")
+                print("Name: \(details.name)")
+                print("Batch: \(details.batch)")
+                print("AID: \(details.AID)")
+                print("RID: \(details.RID)")
+                print("----------------------")
+            }
+        } else {
+            print("No cells selected.")
+        }
+        
         performSegue(withIdentifier: "QRToFinal", sender: self)
     }
     
