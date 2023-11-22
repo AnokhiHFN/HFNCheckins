@@ -87,6 +87,42 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         view.addSubview(backgroundImage)
         print(abhyasis)
         setupUI()
+        
+        // Add Cancel button
+                let cancelButton = UIButton(type: .system)
+                cancelButton.setTitle("Cancel", for: .normal)
+                cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+                view.addSubview(cancelButton)
+
+                // Add CheckIn button
+                let checkInButton = UIButton(type: .system)
+                checkInButton.setTitle("Check In", for: .normal)
+                checkInButton.addTarget(self, action: #selector(checkInButtonTapped), for: .touchUpInside)
+                view.addSubview(checkInButton)
+
+                // Set up constraints for buttons
+                cancelButton.translatesAutoresizingMaskIntoConstraints = false
+                checkInButton.translatesAutoresizingMaskIntoConstraints = false
+
+                NSLayoutConstraint.activate([
+                    cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+
+                    checkInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    checkInButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+                ])
+    }
+    
+    // Handle Cancel button tap
+    @objc func cancelButtonTapped() {
+        // Implement Cancel button action
+        print("Cancel button tapped")
+    }
+
+    // Handle Check In button tap
+    @objc func checkInButtonTapped() {
+        // Implement Check In button action
+        print("Check In button tapped")
     }
     
     private func setupUI() {

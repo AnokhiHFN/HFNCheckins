@@ -61,6 +61,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="7tq-W2-ku1"/>
+                    <connections>
+                        <segue destination="gP3-6B-HeM" kind="show" identifier="QRToFinal" id="IwG-Wi-HvB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1l-MW-N2N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -162,7 +165,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eXM-vp-s6w"/>
+        <segue reference="IwG-Wi-HvB"/>
         <segue reference="BJd-i6-9ga"/>
     </inferredMetricsTieBreakers>
     <resources>
