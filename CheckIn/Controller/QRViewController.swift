@@ -6,6 +6,7 @@ protocol QRCodeDelegate: AnyObject {
 }
 
 class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    var checkInButton: UIButton!
     
     var info: String? {
         didSet {
@@ -99,12 +100,14 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 view.addSubview(cancelButton)
 
                 // Add CheckIn button
-                let checkInButton = UIButton(type: .system)
+                checkInButton = UIButton(type: .system)
                 checkInButton.setTitle("Check In", for: .normal)
         checkInButton.setTitleColor(.white, for: .normal) // Set text color to white
 
                 checkInButton.backgroundColor = UIColor(named: "SystemButtoncolor") // Set the color for "Test"
         checkInButton.layer.cornerRadius = 15 // Adjust the corner radius as needed
+        checkInButton.alpha = 0.5 // Set initial alpha to half
+        checkInButton.isEnabled = false // Make the button initially inactive
                 checkInButton.addTarget(self, action: #selector(checkInButtonTapped), for: .touchUpInside)
                 view.addSubview(checkInButton)
 
@@ -261,6 +264,9 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Handle cell selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Handle selection as needed
+        // Enable the Check In button when a cell is selected
+        checkInButton.isEnabled = true
+        checkInButton.alpha = 1.0 // Make the button fully visible
         if let cell = tableView.cellForRow(at: indexPath) {
             // Access the selected cell
             cell.contentView.backgroundColor = UIColor(named: "formColor") ?? UIColor.systemBlue
@@ -270,6 +276,11 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Handle cell deselection
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         // Handle deselection as needed
+        if tableView.indexPathsForSelectedRows == nil {
+                    // Disable the Check In button when no cells are selected
+                    checkInButton.isEnabled = false
+                    checkInButton.alpha = 0.5 // Set the button's alpha to half
+        }
         if let cell = tableView.cellForRow(at: indexPath) {
             // Access the deselected cell
             cell.contentView.backgroundColor = UIColor.white // Change background color, or perform other actions
