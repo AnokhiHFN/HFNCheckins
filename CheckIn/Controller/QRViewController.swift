@@ -121,9 +121,18 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // Handle Cancel button tap
     @objc func cancelButtonTapped() {
-        // Implement Cancel button action
-        print("Cancel button tapped")
-    }
+            // Implement Cancel button action
+            print("Cancel button tapped")
+
+            if let navigationController = navigationController {
+                // Pop to the root view controller
+                navigationController.popToRootViewController(animated: true)
+            } else {
+                // If not embedded in a navigation controller, you might want to handle dismissal
+                // Dismiss the current view controller
+                dismiss(animated: true, completion: nil)
+            }
+        }
 
     // Handle Check In button tap
     @objc func checkInButtonTapped() {
