@@ -106,10 +106,12 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
                 NSLayoutConstraint.activate([
                     cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+                    cancelButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -8), // Adjust as needed
+                    cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
 
+                    checkInButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 8), // Adjust as needed
                     checkInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    checkInButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+                    checkInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180)
                 ])
     }
     
