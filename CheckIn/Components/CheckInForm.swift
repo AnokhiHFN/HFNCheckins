@@ -16,13 +16,15 @@ struct SwiftUIView: View {
     @Binding var email: String // Use Binding
     @Binding var mobile: String // Use Binding
     @State private var fullName = ""
-    @State private var selectedAgeRange = 0
+    @State private var ageGroup = "0"
     @State private var gender: String = "Not Selected"
     @State private var city = ""
     @State private var state = ""
     @State private var country = ""
     @State private var dorm = ""
     @State private var isCheckinButtonEnabled = false // Added state for button
+    @State private var dormAndBertAllocation = ""
+    @State private var timestamp = ""
     
     var mobilePlaceholder: String {
         if email.isEmpty {
@@ -90,9 +92,9 @@ struct SwiftUIView: View {
                     TextField("Full Name", text: $fullName)
                     HStack {
                         VStack {
-                            Picker("Age", selection: $selectedAgeRange) {
+                            Picker("Age", selection: $ageGroup) {
                                 ForEach(0..<ageRanges.count, id: \.self) { index in
-                                    Text(ageRanges[index]).tag(index)
+                                    Text(ageRanges[index]).tag(ageRanges[index])
                                 }
                             }
                             .pickerStyle(DefaultPickerStyle())
@@ -155,19 +157,20 @@ struct SwiftUIView: View {
                                     let checkInData = CheckInData(
                                         batch: batch,
                                         fullName: fullName,
+                                        mobile: mobile,
+                                        email: email,
+                                        ageGroup: ageGroup,
                                         gender: gender,
                                         city: city,
                                         state: state,
                                         country: country,
-                                        dorm: dorm
-                                        
+                                        timestamp: timestamp,
+                                        dormAndBerthAllocation: dorm
                                     )
                                     delegate?.checkinButtonPressed(with: checkInData)
                                 }
                                 .disabled(!isCheckinButtonEnabled)
                                 .opacity(isCheckinButtonEnabled ? 1.0 : 0.5)
-                                
-                        
                     }
                 }
             }
@@ -195,8 +198,8 @@ struct SwiftUIView: View {
                     // Watch for changes in the fullName field
                     updateCheckinButtonState()
                 })
-                .onChange(of: selectedAgeRange, perform: { newValue in
-                    // Watch for changes in the selectedAgeRange field
+                .onChange(of: ageGroup, perform: { newValue in
+                    // Watch for changes in the ageGroup field
                     updateCheckinButtonState()
                 })
                 .onChange(of: gender, perform: { newValue in
@@ -220,9 +223,11 @@ struct SwiftUIView: View {
     private func updateCheckinButtonState() {
         print("update Checking Button State")
         print("gender is nil? \(gender)")
+        // Handle "0" as a special case
+        let isValidAgeGroup = ageGroup != nil && ageGroup != "0"
         isCheckinButtonEnabled = !batch.isEmpty &&
                                 !fullName.isEmpty &&
-                                selectedAgeRange > 0 &&
+                                isValidAgeGroup &&
                                 gender != "Not Selected" &&
                                 !city.isEmpty &&
                                 !state.isEmpty &&

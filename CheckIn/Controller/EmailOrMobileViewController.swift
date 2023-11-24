@@ -35,53 +35,72 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
     @State var mobile: String? = "DefaultMobileError" //
 
     func checkinButtonPressed(with checkInData: CheckInData) {
-        let db = Firestore.firestore()
-        
-        if Auth.auth().currentUser == nil {
+        guard let currentUser = Auth.auth().currentUser else {
             print("User is not authenticated, attempting to sign in anonymously...")
-            Auth.auth().signInAnonymously { [self] authResult, error in
+            Auth.auth().signInAnonymously { [weak self] authResult, error in
+                guard let self = self else { return }
                 if let error = error {
                     // Handle the error
                     print("Error signing in anonymously: \(error.localizedDescription)")
                 } else {
                     // The user is signed in anonymously
                     print("Signed In")
-                    
                     // Now that the user is signed in, you can proceed to write data to Firestore.
-                    writeCheckinData(db: db, batch: checkInData.batch)
-
+                    self.writeCheckinData(db: Firestore.firestore(), checkInData: checkInData)
                 }
             }
-        } else {
-            // User is already authenticated, proceed to write data.
-            writeCheckinData(db: db, batch: checkInData.batch)
-
+            return
         }
+
+        // User is already authenticated, proceed to write data.
+        writeCheckinData(db: Firestore.firestore(), checkInData: checkInData)
     }
 
-    func writeCheckinData(db: Firestore, batch: String) {
-        let docRef = db.collection("events/202310_october_retreat/checkins").document(batch)
-        let timestamp = FieldValue.serverTimestamp()
+    func writeCheckinData(db: Firestore, checkInData: CheckInData) {
         
-        let data: [String: Any] = [
-            "batch": batch,
-            "timestamp": timestamp
-        ]
+        var emailPart = ""
+        if let email = checkInData.email {
+            emailPart = "\(email)"
+        }
+
+        var mobilePart = ""
+        if let mobile = checkInData.mobile {
+            mobilePart = "\(mobile)"
+        }
         
-        docRef.setData(data, merge: true) { [self] error in
-            if let error = error {
-                // Handle the error, e.g., show an alert to the user
-                print("Error writing document: \(error)")
-            } else {
-                // Document successfully written
-                print("Document successfully written!")
-                
-                // Continue to your next action, e.g., segue to another screen
-                print("debugging: \(selectedBatch ?? "hello")")
-                performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
+        let docRef = db.collection("events/202310_october_retreat/checkins").document("em-\(emailPart)-\(mobilePart)-\(checkInData.fullName)")
+
+        
+        // Convert CheckInData to a dictionary
+        do {
+            var data = try checkInData.asDictionary()
+            
+            // Remove nil values to avoid Firestore issues with optional fields
+            data = data.filter { $0.value as? String != nil }
+
+            docRef.setData(data, merge: true) { [weak self] error in
+                guard let self = self else { return }
+                if let error = error {
+                    // Handle the error, e.g., show an alert to the user
+                    print("Error writing document: \(error)")
+                } else {
+                    // Document successfully written
+                    print("Document successfully written!")
+                    
+                    // Continue to your next action, e.g., segue to another screen
+                    print("debugging: \(self.selectedBatch ?? "hello")")
+                    self.performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
+                }
             }
+        } catch {
+            print("Error converting CheckInData to dictionary: \(error)")
         }
     }
+
+
+
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
