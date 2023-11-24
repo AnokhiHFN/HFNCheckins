@@ -14,8 +14,8 @@
             filePath = "CheckIn/Controller/DormViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5"
-            endingLineNumber = "5"
+            startingLineNumber = "8"
+            endingLineNumber = "8"
             landmarkName = "BatchSelectionDelegate"
             landmarkType = "5">
          </BreakpointContent>
