@@ -195,7 +195,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
         func writeCheckinData(_ checkInData: CheckInDataID) {
             let db = Firestore.firestore()
 
-            let docRef = db.collection("events/202310_october_retreat/checkins").document("\(checkInData.abhyasiId)")
+            let docRef = db.collection("events/202311_PM_visit/checkins").document("\(checkInData.abhyasiId)")
 
             do {
                 var data = try checkInData.asDictionary()

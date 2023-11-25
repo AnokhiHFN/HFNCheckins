@@ -68,7 +68,7 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
             mobilePart = "\(mobile)"
         }
         
-        let docRef = db.collection("events/202310_october_retreat/checkins").document("em-\(emailPart)-\(mobilePart)-\(checkInData.fullName)")
+        let docRef = db.collection("events/202311_PM_visit/checkins").document("em-\(emailPart)-\(mobilePart)-\(checkInData.fullName)")
 
         
         // Convert CheckInData to a dictionary

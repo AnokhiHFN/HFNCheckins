@@ -1,4 +1,7 @@
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 
 protocol QRCodeDelegate: AnyObject {
@@ -155,23 +158,68 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @objc func checkInButtonTapped() {
         // Implement Check In button action
         print("Check In button tapped")
-        
+
         // Print details of selected cells
+        var selectedAbhyasiDetails: [AbhyasiDetails] = []
+
         if let selectedRows = tableView.indexPathsForSelectedRows {
             for indexPath in selectedRows {
                 let details = abhyasiDetailsArray[indexPath.row]
-                print("Selected Cell Details:")
-                print("Name: \(details.name)")
-                print("Batch: \(details.batch)")
-                print("AID: \(details.AID)")
-                print("RID: \(details.RID)")
-                print("----------------------")
+                selectedAbhyasiDetails.append(details)
             }
         } else {
             print("No cells selected.")
         }
-        
+
+        // Check if there are selected Abhyasi details
+        guard !selectedAbhyasiDetails.isEmpty else {
+            print("No Abhyasi details selected.")
+            return
+        }
+
+        // Iterate through selected Abhyasi details and insert into the database
+        for details in selectedAbhyasiDetails {
+            let checkInDataQR = CheckInDataQR(
+                abhyasiId: details.AID,
+                berthPreference: "", // Set berthPreference as needed
+                dormAndBerthAllocation: "", // Set dormAndBerthAllocation as needed
+                dormPreference: "", // Set dormPreference as needed
+                eventName: "68th Birthday Celebration of Pujya Daaji Maharaj",
+                fullName: details.name,
+                orderId: "68th Birthday Celebration of Pujya Daaji Maharaj",
+                pnr: nil,
+                regId: details.RID,
+                timestamp: "" // Set timestamp as needed
+            )
+
+            writeCheckinData(checkInDataQR)
+        }
+
         performSegue(withIdentifier: "QRToFinal", sender: self)
+    }
+    
+    // Function to write check-in data to Firestore
+    func writeCheckinData(_ checkInData: CheckInDataQR) {
+        let db = Firestore.firestore()
+
+        let docRef = db.collection("events/202311_PM_visit/checkins").document("\(checkInData.regId ?? "RegId is nil")")
+
+        do {
+            let data = try checkInData.asDictionary()
+
+            docRef.setData(data, merge: true) { [self] error in
+                if let error = error {
+                    // Handle the error, e.g., show an alert to the user
+                    print("Error writing document: \(error)")
+                } else {
+                    // Document successfully written
+                    print("Document successfully written!")
+                }
+            }
+        } catch {
+            // Handle the error when converting checkInData to a dictionary
+            print("Error converting checkInData to dictionary: \(error)")
+        }
     }
     
     private func setupUI() {
