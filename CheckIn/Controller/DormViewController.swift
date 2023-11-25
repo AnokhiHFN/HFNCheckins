@@ -1,4 +1,7 @@
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 // Define a protocol for communication between EntryViewController and DormViewController
 protocol BatchSelectionDelegate: AnyObject {
@@ -171,10 +174,49 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     // Function to handle the "CheckIn" button tap
     @objc func checkInAction() {
         // Handle the action when the "CheckIn" button is tapped
-        if let enteredText = infoTextField.text {
-            print("Final entered text from infoTextField: \(enteredText)")
-            // You can use the enteredText as needed, e.g., store it in a variable or send it to another function.
+        guard let abhyasiID = abhyasiID, let selectedBatch = selectedBatch else {
+            print("Missing required data for check-in")
+            return
         }
-        performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
+        
+        let dormAndBerthAllocation = infoTextField.text ?? ""
+
+        let checkInData = CheckInDataID(
+            abhyasiId: abhyasiID,
+            batch: selectedBatch,
+            dormAndBerthAllocation: dormAndBerthAllocation,
+            timestamp: "" // Make sure timestamp is defined and set appropriately
+        )
+
+        writeCheckinData(checkInData)
     }
+    
+    // Function to write check-in data to Firestore
+        func writeCheckinData(_ checkInData: CheckInDataID) {
+            let db = Firestore.firestore()
+
+            let docRef = db.collection("events/202311_PM_visit/checkins").document("\(checkInData.abhyasiId)")
+
+            do {
+                var data = try checkInData.asDictionary()
+
+
+                docRef.setData(data, merge: true) { [self] error in
+                    if let error = error {
+                        // Handle the error, e.g., show an alert to the user
+                        print("Error writing document: \(error)")
+                    } else {
+                        // Document successfully written
+                        print("Document successfully written!")
+
+                        // Continue to your next action, e.g., segue to another screen
+                        performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
+                    }
+                }
+            } catch {
+                // Handle the error when converting checkInData to a dictionary
+                print("Error converting checkInData to dictionary: \(error)")
+            }
+        }
+        
 }
