@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g97-D0-4JE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g97-D0-4JE">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
+    <accessibilityOverrides/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +13,7 @@
         <!--Entry View Controller-->
         <scene sceneID="vdP-1t-lmr">
             <objects>
-                <viewController id="6yr-2g-Nmc" customClass="EntryViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EntryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6yr-2g-Nmc" customClass="EntryViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AC7-3P-AE5">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,6 +69,19 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1l-MW-N2N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4680" y="-1403"/>
+        </scene>
+        <!--Event List View Controller-->
+        <scene sceneID="xBx-He-Ryf">
+            <objects>
+                <viewController storyboardIdentifier="EventListViewController" definesPresentationContext="YES" modalPresentationStyle="fullScreen" id="Uak-zE-ff2" customClass="EventListViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="iIa-Gb-Xrr"/>
+                    <connections>
+                        <segue destination="6yr-2g-Nmc" kind="show" identifier="EventToEntry" id="I6o-eG-diJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ua-oG-2dW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2690" y="-1016"/>
         </scene>
         <!--Dorm View Controller-->
         <scene sceneID="1bj-09-O58">
@@ -148,25 +162,48 @@
         <!--Navigation Controller-->
         <scene sceneID="gxg-JK-VhT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g97-D0-4JE" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g97-D0-4JE" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="h1p-0v-KXZ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ljr-vV-Tp9">
                         <rect key="frame" x="0.0" y="59" width="430" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="6yr-2g-Nmc" kind="relationship" relationship="rootViewController" id="K3z-C6-TlI"/>
+                        <segue destination="Sar-9g-L8q" kind="relationship" relationship="rootViewController" id="QhY-Ze-LFE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYT-kc-UXv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1826.5116279069766" y="-194.42060085836911"/>
+            <point key="canvasLocation" x="445" y="-545"/>
+        </scene>
+        <!--Container View Controller-->
+        <scene sceneID="jk1-eX-dAX">
+            <objects>
+                <viewController storyboardIdentifier="ContainerViewController" id="Sar-9g-L8q" customClass="ContainerViewController" customModule="CheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0eS-gX-u1d">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="iNB-K9-ixy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="d6b-AU-z5Q"/>
+                    <connections>
+                        <segue destination="Uak-zE-ff2" kind="show" identifier="EventSegue" animates="NO" id="COc-z6-cik"/>
+                        <segue destination="6yr-2g-Nmc" kind="show" identifier="EntrySegue" id="gg6-8A-0jp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bt7-SR-dWj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1566" y="-545"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="IwG-Wi-HvB"/>
-        <segue reference="BJd-i6-9ga"/>
+        <segue reference="eXM-vp-s6w"/>
+        <segue reference="4Ud-kd-mH8"/>
+        <segue reference="gg6-8A-0jp"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Background" width="1290" height="2796"/>
