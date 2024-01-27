@@ -58,10 +58,8 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
 
     }
     
-    // Add this UITableViewDelegate method to set the cell height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Set your preferred cell height here
-        return 60.0
+        return UITableView.automaticDimension
     }
     
     // MARK: - UITableViewDataSource
@@ -88,6 +86,8 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         // Set corner radius for cell
         cell.contentView.layer.cornerRadius = 10
         cell.contentView.layer.masksToBounds = true
+        // Set number of lines to 0 for multiline text
+        cell.textLabel?.numberOfLines = 0
         
         
         return cell
