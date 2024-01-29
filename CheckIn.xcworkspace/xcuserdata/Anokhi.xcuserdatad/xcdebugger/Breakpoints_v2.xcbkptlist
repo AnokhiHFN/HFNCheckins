@@ -20,5 +20,53 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A30D0D7C-CA98-4545-9BE8-47F021B0743B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CheckIn/Components/CheckInForm.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "A30D0D7C-CA98-4545-9BE8-47F021B0743B - 1c0ab862abd45fd6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CheckIn.SwiftUIView.body.getter : some"
+                  moduleName = "CheckIn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Anokhi/Documents/HeartfulnessApps/HFN/CheckIn/Components/CheckInForm.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "928">
+               </Location>
+               <Location
+                  uuid = "A30D0D7C-CA98-4545-9BE8-47F021B0743B - 462ce6256c2ce5d9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(_: &#x3c4;_1_0, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0)&gt; in CheckIn.SwiftUIView.body.getter : some"
+                  moduleName = "CheckIn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Anokhi/Documents/HeartfulnessApps/HFN/CheckIn/Components/CheckInForm.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "756">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

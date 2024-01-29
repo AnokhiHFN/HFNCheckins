@@ -71,6 +71,10 @@ BatchSelectionDelegate{
         // Customize the back button to always navigate to EventListViewController
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonPressed))
         navigationItem.leftBarButtonItem = backButton
+        // Customize the back button color
+        if let navigationController = navigationController {
+            navigationController.navigationBar.tintColor = UIColor(named: "backButtonColor")
+        }
 
         
         
