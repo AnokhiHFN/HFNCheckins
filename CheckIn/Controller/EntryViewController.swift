@@ -4,7 +4,8 @@ class EntryViewController: UIViewController,EmailOrMobileViewControllerDelegate,
 BatchSelectionDelegate{
 
     
-
+    var selectedEventTitle: String?
+    let titleLabel = UILabel()
     var dormViewController: DormViewController?
     var emailOrMobileViewController: EmailOrMobileViewController?
     
@@ -21,6 +22,15 @@ BatchSelectionDelegate{
     var abhayasiID: String = ""
     var email: String?
     var mobile: String?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Update the title label with the selected event title
+        if let title = selectedEventTitle {
+            titleLabel.text = title
+        }
+    }
 
     
     override func viewDidLoad() {
@@ -32,9 +42,38 @@ BatchSelectionDelegate{
         backgroundImage.contentMode = .scaleAspectFill
         view.addSubview(backgroundImage)
         
+        // Retrieve the selected event title from UserDefaults
+        selectedEventTitle = UserDefaults.standard.string(forKey: "SelectedEventTitle")
         // Create a label
-        let titleLabel = TitleLabel()
-        view.addSubview(titleLabel)
+        // Use selectedEventTitle as needed
+        if let title = selectedEventTitle {
+            // Do something with the selected title
+
+            titleLabel.text = title
+            titleLabel.textAlignment = .center
+            titleLabel.textColor = .black
+            titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+            titleLabel.numberOfLines = 0 // Allow multiple lines
+
+            // Adjust the width and height based on your layout needs
+            let labelWidth: CGFloat = 350
+            let labelHeight: CGFloat = titleLabel.sizeThatFits(CGSize(width: labelWidth, height: .greatestFiniteMagnitude)).height
+
+            // Reduce the space on top and bottom by adjusting the y coordinate
+            let topBottomSpace: CGFloat = 20
+            titleLabel.frame = CGRect(x: (view.frame.width - labelWidth) / 2, y: topBottomSpace, width: labelWidth, height: labelHeight)
+
+            // Add the label to the view
+            view.addSubview(titleLabel)
+            
+        }
+        
+        // Customize the back button to always navigate to EventListViewController
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonPressed))
+        navigationItem.leftBarButtonItem = backButton
+
+        
+        
         
         // Create a picker view for Batch
         batchPickerView.delegate = self // Set the delegate
@@ -128,6 +167,14 @@ BatchSelectionDelegate{
         ])
         
         infoTextField.delegate = self
+    }
+    
+    // Action method for the custom back button
+    @objc func backButtonPressed() {
+        // Navigate to EventListViewController
+        if let eventListViewController = navigationController?.viewControllers.first(where: { $0 is EventListViewController }) {
+            navigationController?.popToViewController(eventListViewController, animated: true)
+        }
     }
     
     @objc func startCheckIn() {

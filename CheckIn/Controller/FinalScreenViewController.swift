@@ -2,7 +2,6 @@ import UIKit
 import SwiftUI
 
 
-
 class FinalScreenViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -70,10 +69,12 @@ class FinalScreenViewController: UIViewController {
         view.addSubview(returnButton)
     }
 
-    // Action method to return to the root view
     @objc func returnToRootView() {
-        if let navigationController = navigationController {
-            navigationController.popToRootViewController(animated: true)
+        // Assuming your entry view controller has the identifier "EntryViewController"
+        
+        if let entryViewController = storyboard?.instantiateViewController(withIdentifier: "EntryViewController") {
+            navigationController?.pushViewController(entryViewController, animated: true)
         }
+        
     }
 }
