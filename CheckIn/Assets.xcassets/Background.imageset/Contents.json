@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "bg_light-2.jpg",
+      "filename" : "bg_light-fotor-20240129134224.jpg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "bg_light-2 1.jpg",
+      "filename" : "bg_light-fotor-20240129134224 1.jpg",
       "idiom" : "universal"
     },
     {
@@ -21,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "bg_dark-2 2.png",
+      "filename" : "bg_dark-fotor-20240129134258.jpg",
       "idiom" : "universal"
     }
   ],
