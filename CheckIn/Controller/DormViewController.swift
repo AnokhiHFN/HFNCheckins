@@ -33,7 +33,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
         
         // Set the color of the back button to "buttonColor"
         if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.tintColor = UIColor(named: "EntryTextColor")
+            navigationBar.tintColor = UIColor(named: "backButtonColor")
         }
 
         // Create a background image view

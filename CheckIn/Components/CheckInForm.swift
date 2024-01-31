@@ -8,8 +8,25 @@ protocol CheckInFormDelegate: AnyObject {
     func checkinButtonPressed(with checkInData: CheckInData)
 }
 
+struct FormHiddenBackground: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 16.0, *) {
+            content.scrollContentBackground(.hidden)
+            
+        } else {
+            content.onAppear {
+                UITableView.appearance().backgroundColor = .clear
+            }
+            .onDisappear {
+                UITableView.appearance().backgroundColor = .systemGroupedBackground
+            }
+        }
+    }
+}
+
 @available(iOS 14.0, *)
 struct SwiftUIView: View {
+    
     @Environment(\.presentationMode) var presentationMode
     weak var delegate: CheckInFormDelegate?
     @Binding var batch: String // Use Binding
@@ -25,6 +42,7 @@ struct SwiftUIView: View {
     @State private var isCheckinButtonEnabled = false // Added state for button
     @State private var dormAndBertAllocation = ""
     @State private var timestamp = ""
+
     
     var mobilePlaceholder: String {
         if email.isEmpty {
@@ -76,6 +94,8 @@ struct SwiftUIView: View {
     ]
 
     var body: some View {
+        
+
         VStack {
             // Your existing content here
             
@@ -83,10 +103,12 @@ struct SwiftUIView: View {
             Divider()
             
             Form {
+                
                 Section {
                     TextField("Batch", text: $batch)
                         .disabled(true)
-                }
+                }.listRowBackground(Color("formColor"))
+
                 
                 Section {
                     TextField("Full Name", text: $fullName)
@@ -99,7 +121,7 @@ struct SwiftUIView: View {
                             }
                             .pickerStyle(DefaultPickerStyle())
                             .frame(width: 130)
-                        }
+                        }.listRowBackground(Color("formColor"))
                         
                         Spacer()
                         
@@ -113,8 +135,10 @@ struct SwiftUIView: View {
                             .pickerStyle(DefaultPickerStyle())
                             .frame(width: 170)
                         }
+                        
+                        
                     }
-                }
+                }.listRowBackground(Color("formColor"))
                 
                 Section {
                     TextField("City", text: $city)
@@ -122,7 +146,7 @@ struct SwiftUIView: View {
                     TextField("State", text: $state)
                     
                     TextField("Country", text: $country) // Added country field
-                }
+                }.listRowBackground(Color("formColor"))
                 Section {
                     TextField(mobilePlaceholder, text: $mobile)
                         .disabled(isMobileFieldDisabled)
@@ -131,64 +155,74 @@ struct SwiftUIView: View {
                         .disabled(isEmailFieldDisabled)
                     
                     TextField("Dorm", text: $dorm)
-                }
+                }.listRowBackground(Color("formColor"))
                 
                 Section {
                     HStack {
-                            Text("Cancel")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("buttonColor"))
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    // Dismiss the current view (SwiftUIView)
-                                    presentationMode.wrappedValue.dismiss()
-                                }
+                        Text("Cancel")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color("buttonColor"))
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .onTapGesture {
+                                // Dismiss the current view (SwiftUIView)
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         
                         
                         Text("Check-in")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("buttonColor"))
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    let checkInData = CheckInData(
-                                        batch: batch,
-                                        fullName: fullName,
-                                        mobile: mobile,
-                                        email: email,
-                                        ageGroup: ageGroup,
-                                        gender: gender,
-                                        city: city,
-                                        state: state,
-                                        country: country,
-                                        timestamp: timestamp,
-                                        dormAndBerthAllocation: dorm
-                                    )
-                                    delegate?.checkinButtonPressed(with: checkInData)
-                                }
-                                .disabled(!isCheckinButtonEnabled)
-                                .opacity(isCheckinButtonEnabled ? 1.0 : 0.5)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color("buttonColor"))
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .onTapGesture {
+                                let checkInData = CheckInData(
+                                    batch: batch,
+                                    fullName: fullName,
+                                    mobile: mobile,
+                                    email: email,
+                                    ageGroup: ageGroup,
+                                    gender: gender,
+                                    city: city,
+                                    state: state,
+                                    country: country,
+                                    timestamp: timestamp,
+                                    dormAndBerthAllocation: dorm
+                                )
+                                delegate?.checkinButtonPressed(with: checkInData)
+                            }
+                            .disabled(!isCheckinButtonEnabled)
+                            .opacity(isCheckinButtonEnabled ? 1.0 : 0.5)
                     }
-                }
-            }
+                    
+                    
+                }.listRowBackground(Color("formColor")) // section
+                
+                
+                
+            } // form
+            .modifier(FormHiddenBackground())
+            .listRowBackground(Color("formColor"))
             .cornerRadius(10)
             .padding(10)
-            .background(
-                       Image("Background") // Replace with your image name
-                           .resizable()
-                           .scaledToFill()
-                           .frame(maxWidth: .infinity, maxHeight: .infinity)
-                           .edgesIgnoringSafeArea(.all)
-                   )
-        }// Cover the entire screen
+           .background(
+                Image("Background") // Replace with your image name
+                    .resizable()
+                    .scaledToFill()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+            )
+            
+        } // vstack
         
         .onAppear {
             // Check if the required fields are filled to enable the button
+
             updateCheckinButtonState()
-            }
+            
+            }// Add your background color
 
                 .onChange(of: batch, perform: { newValue in
                     // Watch for changes in the batch field
@@ -219,7 +253,8 @@ struct SwiftUIView: View {
                     updateCheckinButtonState()
                 })
         
-    }
+    } // SwiftUIView
+    
     private func updateCheckinButtonState() {
         print("update Checking Button State")
         print("gender is nil? \(gender)")

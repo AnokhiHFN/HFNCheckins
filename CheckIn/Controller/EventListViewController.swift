@@ -78,10 +78,14 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
             cell.textLabel?.text = "Select Event"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
             cell.textLabel?.textColor = UIColor.black
+            cell.contentView.backgroundColor = UIColor(named: "selectEventColor")
+
         } else {
             // Other cells are event cells
             cell.textLabel?.text = eventTitles?[indexPath.row - 1]
             cell.textLabel?.textColor = UIColor.black
+            cell.contentView.backgroundColor = UIColor(named: "eventListColor")
+
         }
         // Set corner radius for cell
         cell.contentView.layer.cornerRadius = 10
