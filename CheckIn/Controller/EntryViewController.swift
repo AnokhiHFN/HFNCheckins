@@ -67,10 +67,15 @@ BatchSelectionDelegate{
                 view.addSubview(titleLabel)
             }
         
-        // Set the color of the back button to "buttonColor"
-        if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.tintColor = UIColor(named: "backButtonColor")
-        }
+        // Create a custom back button with text "Back"
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+
+        // Set the custom back button as the left bar button item
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
         
         
         
