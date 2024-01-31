@@ -192,31 +192,27 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Function to write check-in data to Firestore
-        func writeCheckinData(_ checkInData: CheckInDataID) {
-            let db = Firestore.firestore()
+    // Function to write check-in data to Firestore
+    func writeCheckinData(_ checkInData: CheckInDataID) {
+        let db = Firestore.firestore()
 
-            let docRef = db.collection("events/202311_PM_visit/checkins").document("\(checkInData.abhyasiId)")
+        let docRef = db.collection("events/202311_PM_visit/checkins").document("\(checkInData.abhyasiId)")
 
-            do {
-                var data = try checkInData.asDictionary()
+        do {
+            var data = try checkInData.asDictionary()
 
+            // Show loading indicator or any visual feedback here
 
-                docRef.setData(data, merge: true) { [self] error in
-                    if let error = error {
-                        // Handle the error, e.g., show an alert to the user
-                        print("Error writing document: \(error)")
-                    } else {
-                        // Document successfully written
-                        print("Document successfully written!")
+            // Write data to local cache first
+            docRef.setData(data, merge: true)
 
-                        // Continue to your next action, e.g., segue to another screen
-                        performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
-                    }
-                }
-            } catch {
-                // Handle the error when converting checkInData to a dictionary
-                print("Error converting checkInData to dictionary: \(error)")
-            }
+            // Continue to your next action, e.g., segue to another screen
+            performSegue(withIdentifier: "DormToCheckinSegue", sender: self)
+        } catch {
+            // Handle the error when converting checkInData to a dictionary
+            print("Error converting checkInData to dictionary: \(error)")
         }
+    }
+
         
 }
