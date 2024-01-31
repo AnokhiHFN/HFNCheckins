@@ -4,6 +4,7 @@ import UIKit
 class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, ScannerDelegate, QRCodeDelegate {
     
     // Reference to DormViewController
+    var selectedEventTitle: String?
     var dormViewController = DormViewController()
     var qrViewController = QRViewController()
     var selectedBatch: String?
@@ -101,9 +102,11 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         
         // Process the scanned QR code or barcode value (stringValue)
         // Check the content and perform the appropriate action
-        if stringValue.hasPrefix("68th Birthday of Pujya Daaji Maharaj| Bhandara") {
+        if stringValue.hasPrefix(selectedEventTitle!) {
             // Scanned code contains special content, go to QRViewController
             didScanQRCode(stringValue)
+            print("***************************")
+            print(stringValue)
             performSegue(withIdentifier: "ScannerToQR", sender: stringValue)
             captureSession.stopRunning()
         } else {
