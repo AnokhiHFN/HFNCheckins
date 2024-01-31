@@ -105,8 +105,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         if stringValue.hasPrefix(selectedEventTitle!) {
             // Scanned code contains special content, go to QRViewController
             didScanQRCode(stringValue)
-            print("***************************")
-            print(stringValue)
+
             performSegue(withIdentifier: "ScannerToQR", sender: stringValue)
             captureSession.stopRunning()
         } else {

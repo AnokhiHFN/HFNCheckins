@@ -14,7 +14,8 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     var info: String? {
         didSet {
             updateTitle()
-            updateSubTitle()
+            //updateSubTitle()
+            updatePNR()
             updateAbhyasiDetailsArray()
         }
     }
@@ -43,9 +44,13 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return components.first
     }
 
-    var subTitleText: String? {
+    var pnrText: String? {
         guard let info = info, let secondComponent = info.components(separatedBy: "|").dropFirst().first else { return nil }
-        return secondComponent
+        let componentsAfterSecondPipe = info.components(separatedBy: "|")
+                                            .dropFirst(2)
+                                            .joined(separator: "|")
+        let pnrComponents = componentsAfterSecondPipe.components(separatedBy: ";")
+        return pnrComponents.first
     }
 
     var titleLabel: UILabel = {
@@ -56,7 +61,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return label
     }()
 
-    let subTitleLabel: UILabel = {
+    let pnrLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
@@ -89,7 +94,9 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
         backgroundImage.contentMode = .scaleAspectFill
         view.addSubview(backgroundImage)
+        print("**************")
         print(abhyasis)
+        print("***************")
         setupUI()
         
         // Add Cancel button
@@ -224,7 +231,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     private func setupUI() {
             view.addSubview(titleLabel)
-            view.addSubview(subTitleLabel)
+            view.addSubview(pnrLabel)
             view.addSubview(tableView)
         
         tableView.layer.cornerRadius = 10  // Adjust the corner radius as needed
@@ -237,13 +244,13 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
                     titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-                    subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    pnrLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    pnrLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+                    pnrLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
                     // Adjust the leading and trailing constraints for the tableView
                     tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    tableView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 16),
+                    tableView.topAnchor.constraint(equalTo: pnrLabel.bottomAnchor, constant: 16),
                     tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -260)
                 ])
@@ -267,19 +274,20 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let filteredDataBlocks = dataBlocks.filter { !$0.isEmpty }
 
         // Parse each data block into AbhyasiDetails and update the array
-        abhyasiDetailsArray = filteredDataBlocks.compactMap { dataBlock in
+        abhyasiDetailsArray = filteredDataBlocks.compactMap { dataBlock -> AbhyasiDetails? in
             let components = dataBlock.components(separatedBy: "|")
-            guard components.count == 4 else { return nil } // Ensure correct format
-
-            return AbhyasiDetails(RID: components[0].trimmingCharacters(in: .whitespacesAndNewlines),
-                                  batch: components[1].trimmingCharacters(in: .whitespacesAndNewlines),
-                                  AID: components[2].trimmingCharacters(in: .whitespacesAndNewlines),
-                                  name: components[3].trimmingCharacters(in: .whitespacesAndNewlines))
+            guard components.count == 4 else { return nil } // Ensure at least 5 components
+            print("NOT NIL")
+            return AbhyasiDetails(
+                RID: components[0].trimmingCharacters(in: .whitespacesAndNewlines),
+                batch: components[1].trimmingCharacters(in: .whitespacesAndNewlines),
+                AID: components[2].trimmingCharacters(in: .whitespacesAndNewlines),
+                name: components[3].trimmingCharacters(in: .whitespacesAndNewlines))
         }
-
-        // Reload the table view to reflect the changes
-        tableView.reloadData()
     }
+
+
+      
     
     // MARK: - UITableViewDataSource
 
@@ -368,8 +376,8 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         updateTitle()
     }
 
-    private func setupSubTitle() {
-        view.addSubview(subTitleLabel)
+   /* private func setupSubTitle() {
+        view.addSubview(pnrLabel)
 
         subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -378,15 +386,17 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
 
-        updateSubTitle()
-    }
+        updatePNR()
+    }*/
 
     private func updateTitle() {
         titleLabel.text = "\(titleText ?? "N/A")"
     }
 
-    private func updateSubTitle() {
-        subTitleLabel.text = "\(subTitleText ?? "N/A")"
+    private func updatePNR() {
+        pnrLabel.text = "\(pnrText ?? "N/A")"
     }
+    
+
 }
 
