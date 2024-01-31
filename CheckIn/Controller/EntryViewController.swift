@@ -47,26 +47,25 @@ BatchSelectionDelegate{
         // Create a label
         // Use selectedEventTitle as needed
         if let title = selectedEventTitle {
-            // Do something with the selected title
-
-            titleLabel.text = title
-            titleLabel.textAlignment = .center
-            titleLabel.textColor = .black
-            titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-            titleLabel.numberOfLines = 0 // Allow multiple lines
-
-            // Adjust the width and height based on your layout needs
-            let labelWidth: CGFloat = 350
-            let labelHeight: CGFloat = titleLabel.sizeThatFits(CGSize(width: labelWidth, height: .greatestFiniteMagnitude)).height
-
-            // Reduce the space on top and bottom by adjusting the y coordinate
-            let topBottomSpace: CGFloat = 20
-            titleLabel.frame = CGRect(x: (view.frame.width - labelWidth) / 2, y: topBottomSpace, width: labelWidth, height: labelHeight)
-
-            // Add the label to the view
-            view.addSubview(titleLabel)
+                // Create a label and adjust it
+                titleLabel.text = title
+                titleLabel.textAlignment = .center
+                titleLabel.textColor = .black
+                titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+                titleLabel.numberOfLines = 0 // Allow multiple lines
             
-        }
+
+                // Adjust the width and height based on your layout needs
+                let labelWidth: CGFloat = 350
+                let labelHeight: CGFloat = titleLabel.sizeThatFits(CGSize(width: labelWidth, height: .greatestFiniteMagnitude)).height
+
+                // Reduce the space on top and bottom by adjusting the y coordinate
+                let topBottomSpace: CGFloat = 20
+                titleLabel.frame = CGRect(x: (view.frame.width - labelWidth) / 2 - 20, y: topBottomSpace, width: labelWidth, height: labelHeight)
+
+                // Add the label to the view
+                view.addSubview(titleLabel)
+            }
         
         // Set the color of the back button to "buttonColor"
         if let navigationBar = self.navigationController?.navigationBar {
@@ -129,13 +128,13 @@ BatchSelectionDelegate{
         // Adjust constraints for items inside the container view
         // (Use containerView as the superview for constraints)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            //titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            //titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            //titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             
-            batchPickerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            batchPickerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            batchPickerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            batchPickerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -40),
+            batchPickerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 35),
+            //batchPickerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 2),
             
             infoTextField.topAnchor.constraint(equalTo: batchPickerView.bottomAnchor, constant: 2),
             infoTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
