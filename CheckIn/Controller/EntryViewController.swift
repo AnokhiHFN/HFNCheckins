@@ -129,13 +129,13 @@ BatchSelectionDelegate{
         // Adjust constraints for items inside the container view
         // (Use containerView as the superview for constraints)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            //titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            //titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             
-            batchPickerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            batchPickerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            batchPickerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            batchPickerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -40),
+            batchPickerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 35),
+            //batchPickerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 2),
             
             infoTextField.topAnchor.constraint(equalTo: batchPickerView.bottomAnchor, constant: 2),
             infoTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
