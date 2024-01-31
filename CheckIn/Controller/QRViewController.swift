@@ -58,6 +58,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.numberOfLines = 0 // Allow multiple lines
         return label
     }()
 
@@ -189,12 +190,12 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             let checkInDataQR = CheckInDataQR(
                 abhyasiId: details.AID,
                 berthPreference: "", // Set berthPreference as needed
-                dormAndBerthAllocation: "", // Set dormAndBerthAllocation as needed
+                dormAndBerthAllocation: "need_to_see", // Set dormAndBerthAllocation as needed
                 dormPreference: "", // Set dormPreference as needed
-                eventName: "68th Birthday Celebration of Pujya Daaji Maharaj",
+                eventName: titleText!,
                 fullName: details.name,
-                orderId: "68th Birthday Celebration of Pujya Daaji Maharaj",
-                pnr: nil,
+                orderId: titleText!,
+                pnr: pnr,
                 regId: details.RID,
                 timestamp: "" // Set timestamp as needed
             )
