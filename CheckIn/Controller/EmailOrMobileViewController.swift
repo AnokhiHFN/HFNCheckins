@@ -57,7 +57,6 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
     }
 
     func writeCheckinData(db: Firestore, checkInData: CheckInData) {
-        
         var emailPart = ""
         if let email = checkInData.email {
             emailPart = "\(email)"
@@ -67,31 +66,24 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
         if let mobile = checkInData.mobile {
             mobilePart = "\(mobile)"
         }
-        
+
         let docRef = db.collection("events/202311_PM_visit/checkins").document("em-\(emailPart)-\(mobilePart)-\(checkInData.fullName)")
 
-        
         // Convert CheckInData to a dictionary
         do {
             var data = try checkInData.asDictionary()
-            
+
             // Remove nil values to avoid Firestore issues with optional fields
             data = data.filter { $0.value as? String != nil }
 
-            docRef.setData(data, merge: true) { [weak self] error in
-                guard let self = self else { return }
-                if let error = error {
-                    // Handle the error, e.g., show an alert to the user
-                    print("Error writing document: \(error)")
-                } else {
-                    // Document successfully written
-                    print("Document successfully written!")
-                    
-                    // Continue to your next action, e.g., segue to another screen
-                    print("debugging: \(self.selectedBatch ?? "hello")")
-                    self.performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
-                }
-            }
+            // Show loading indicator or any visual feedback here
+
+            // Write data to local cache first
+            docRef.setData(data, merge: true)
+
+            // Continue to your next action, e.g., segue to another screen
+            print("debugging: \(self.selectedBatch ?? "hello")")
+            self.performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
         } catch {
             print("Error converting CheckInData to dictionary: \(error)")
         }
