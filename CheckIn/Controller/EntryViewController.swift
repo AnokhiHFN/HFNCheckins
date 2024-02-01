@@ -207,7 +207,6 @@ BatchSelectionDelegate{
         }
         if let destinationVC = segue.destination as? EmailOrMobileViewController,
            segue.identifier == "CheckInSegue" {
-            print("Preparing for segue to EmailOrMobileViewController")
             destinationVC.selectedBatch = getSelectedBatch()
             if (email != nil) {
                 destinationVC.givenEmail = email
@@ -301,7 +300,6 @@ extension EntryViewController:
         }
         else if (updatedText != nil) == abhyasiManager.isValidNumber() {
             mobile = updatedText!
-            print(mobile!)
             email = ""
                 startButton.isEnabled = true
                 startButton.alpha = 1.0 // Set the alpha to make it normal
@@ -321,7 +319,6 @@ extension EntryViewController:
             segue = "Invalid"
 
         }
-        print("Segue: \(segue)")
         return true
     }
 }

@@ -103,7 +103,6 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         // Check if a row is selected and it is not the title cell
         if indexPath.row > 0, let selectedTitle = eventTitles?[indexPath.row - 1] {
             // Perform the segue to EntryViewController
-            print("selected title is \(selectedTitle)")
             UserDefaults.standard.set(selectedTitle, forKey: "SelectedEventTitle")
             performSegue(withIdentifier: "EventToEntry", sender: selectedTitle)
         }

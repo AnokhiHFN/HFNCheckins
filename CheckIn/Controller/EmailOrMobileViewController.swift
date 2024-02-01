@@ -44,7 +44,6 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
                     print("Error signing in anonymously: \(error.localizedDescription)")
                 } else {
                     // The user is signed in anonymously
-                    print("Signed In")
                     // Now that the user is signed in, you can proceed to write data to Firestore.
                     self.writeCheckinData(db: Firestore.firestore(), checkInData: checkInData)
                 }
@@ -81,8 +80,6 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
             // Write data to local cache first
             docRef.setData(data, merge: true)
 
-            // Continue to your next action, e.g., segue to another screen
-            print("debugging: \(self.selectedBatch ?? "hello")")
             self.performSegue(withIdentifier: "CheckinToFinalScreen", sender: self)
         } catch {
             print("Error converting CheckInData to dictionary: \(error)")

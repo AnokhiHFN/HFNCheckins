@@ -256,8 +256,6 @@ struct SwiftUIView: View {
     } // SwiftUIView
     
     private func updateCheckinButtonState() {
-        print("update Checking Button State")
-        print("gender is nil? \(gender)")
         // Handle "0" as a special case
         let isValidAgeGroup = ageGroup != nil && ageGroup != "0"
         isCheckinButtonEnabled = !batch.isEmpty &&
@@ -267,6 +265,5 @@ struct SwiftUIView: View {
                                 !city.isEmpty &&
                                 !state.isEmpty &&
                                 !country.isEmpty
-        print("isCheckinButtonEnabled: \(isCheckinButtonEnabled)")
     }
 }
