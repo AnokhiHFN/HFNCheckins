@@ -23,27 +23,18 @@ class CustomTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            infoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            infoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -50),
             infoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
+            //infoLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -8), // Allow dynamic cell height
+
             textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            textField.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 8),
+            textField.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 200),
             textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            textField.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -8) // Allow dynamic cell height
         ])
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupTextField() {
-        textField = UITextField()
-        textField.placeholder = "Type here..."
-        textField.delegate = self // Set the delegate here
-        contentView.addSubview(textField)
-
-        // Add constraints for the text field
-        // ... (adjust the constraints based on your layout)
     }
 }

@@ -78,26 +78,11 @@
             filePath = "CheckIn/Controller/QRViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "425"
-            endingLineNumber = "425"
-            landmarkName = "textFieldDidChange(_:)"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "textField(_:didChangeCharactersIn:replacementString:)"
             landmarkType = "7">
             <Locations>
-               <Location
-                  uuid = "E0264B08-2F4B-4FD5-B84D-219E512CA6A8 - 90948e981df184ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CheckIn.QRViewController.textFieldDidChange(__C.UITextField) -&gt; ()"
-                  moduleName = "CheckIn"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Anokhi/Documents/HeartfulnessApps/HFN/CheckIn/Controller/QRViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "426"
-                  endingLineNumber = "426"
-                  offsetFromSymbolStart = "88">
-               </Location>
                <Location
                   uuid = "E0264B08-2F4B-4FD5-B84D-219E512CA6A8 - 9cf3a7e419d3e6a6"
                   shouldBeEnabled = "Yes"
@@ -111,6 +96,36 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "427"
                   endingLineNumber = "427"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "E0264B08-2F4B-4FD5-B84D-219E512CA6A8 - 9cf3a7e419d3e6d9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CheckIn.QRViewController.textField(_: __C.UITextField, didChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; ()"
+                  moduleName = "CheckIn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Anokhi/Documents/HeartfulnessApps/HFN/CheckIn/Controller/QRViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "426"
+                  endingLineNumber = "426"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "E0264B08-2F4B-4FD5-B84D-219E512CA6A8 - 9cf3a7e419d3e7d1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CheckIn.QRViewController.textField(_: __C.UITextField, didChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; ()"
+                  moduleName = "CheckIn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Anokhi/Documents/HeartfulnessApps/HFN/CheckIn/Controller/QRViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "418"
+                  endingLineNumber = "418"
                   offsetFromSymbolStart = "136">
                </Location>
             </Locations>

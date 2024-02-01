@@ -193,10 +193,9 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
         // Iterate through selected Abhyasi details and insert into the database
         for details in selectedAbhyasiDetails {
-            print("accomo: \(details.typedInfo)")
             let checkInDataQR = CheckInDataQR(
                 abhyasiId: details.AID,
-                dormAndBerthAllocation: details.typedInfo ?? "No Accomodation", // Set dormAndBerthAllocation as needed
+                dormAndBerthAllocation: details.typedInfo ?? "", // Set dormAndBerthAllocation as needed
                 eventName: titleText!,
                 fullName: details.name,
                 orderId: titleText!,
@@ -332,14 +331,6 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             textField.placeholder = "Type here..."
             cell.contentView.addSubview(textField)
 
-            // Set up constraints for the UITextField
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                textField.topAnchor.constraint(equalTo: cell.textLabel!.bottomAnchor, constant: 8),
-                textField.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
-                textField.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16),
-                textField.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8)
-            ])
 
             // Set tag and addTarget for the UITextField
             textField.tag = indexPath.row
@@ -454,8 +445,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
         var details = abhyasiDetailsArray[rowIndex]
         details.typedInfo = textField.text
-        print("details \(details.typedInfo)")
-        print("textfile.text \(textField.text)")
+
     }
     
 
