@@ -8,13 +8,17 @@ protocol QRCodeDelegate: AnyObject {
     func didScanQRCode(_ info: String)
 }
 
-class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
+    
+    
     var checkInButton: UIButton!
     
     var info: String? {
         didSet {
             updateTitle()
-            updateSubTitle()
+            //updateSubTitle()
+            updatePNR()
             updateAbhyasiDetailsArray()
         }
     }
@@ -43,9 +47,13 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return components.first
     }
 
-    var subTitleText: String? {
+    var pnrText: String? {
         guard let info = info, let secondComponent = info.components(separatedBy: "|").dropFirst().first else { return nil }
-        return secondComponent
+        let componentsAfterSecondPipe = info.components(separatedBy: "|")
+                                            .dropFirst(2)
+                                            .joined(separator: "|")
+        let pnrComponents = componentsAfterSecondPipe.components(separatedBy: ";")
+        return pnrComponents.first
     }
 
     var titleLabel: UILabel = {
@@ -53,10 +61,11 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.numberOfLines = 0 // Allow multiple lines
         return label
     }()
 
-    let subTitleLabel: UILabel = {
+    let pnrLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
@@ -73,8 +82,11 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     var abhyasiDetailsArray: [AbhyasiDetails] = []
 
-    override func viewDidLoad() {
+    override func viewDidLoad() { // Make sure to set the delegate
         super.viewDidLoad()
+        
+        // Register the custom cell class
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
         
         // Set allowsMultipleSelection to true
         tableView.allowsMultipleSelection = true
@@ -89,7 +101,9 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
         backgroundImage.contentMode = .scaleAspectFill
         view.addSubview(backgroundImage)
+        print("**************")
         print(abhyasis)
+        print("***************")
         setupUI()
         
         // Add Cancel button
@@ -181,13 +195,11 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         for details in selectedAbhyasiDetails {
             let checkInDataQR = CheckInDataQR(
                 abhyasiId: details.AID,
-                berthPreference: "", // Set berthPreference as needed
-                dormAndBerthAllocation: "", // Set dormAndBerthAllocation as needed
-                dormPreference: "", // Set dormPreference as needed
-                eventName: "68th Birthday Celebration of Pujya Daaji Maharaj",
+                dormAndBerthAllocation: details.typedInfo ?? "", // Set dormAndBerthAllocation as needed
+                eventName: titleText!,
                 fullName: details.name,
-                orderId: "68th Birthday Celebration of Pujya Daaji Maharaj",
-                pnr: nil,
+                orderId: titleText!,
+                pnr: pnr,
                 regId: details.RID,
                 timestamp: "" // Set timestamp as needed
             )
@@ -224,7 +236,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     private func setupUI() {
             view.addSubview(titleLabel)
-            view.addSubview(subTitleLabel)
+            view.addSubview(pnrLabel)
             view.addSubview(tableView)
         
         tableView.layer.cornerRadius = 10  // Adjust the corner radius as needed
@@ -237,13 +249,13 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
                     titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-                    subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    pnrLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    pnrLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+                    pnrLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
                     // Adjust the leading and trailing constraints for the tableView
                     tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    tableView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 16),
+                    tableView.topAnchor.constraint(equalTo: pnrLabel.bottomAnchor, constant: 16),
                     tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -260)
                 ])
@@ -267,19 +279,23 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let filteredDataBlocks = dataBlocks.filter { !$0.isEmpty }
 
         // Parse each data block into AbhyasiDetails and update the array
-        abhyasiDetailsArray = filteredDataBlocks.compactMap { dataBlock in
+        abhyasiDetailsArray = filteredDataBlocks.compactMap { dataBlock -> AbhyasiDetails? in
             let components = dataBlock.components(separatedBy: "|")
-            guard components.count == 4 else { return nil } // Ensure correct format
+            guard components.count == 4 else { return nil }
 
-            return AbhyasiDetails(RID: components[0].trimmingCharacters(in: .whitespacesAndNewlines),
-                                  batch: components[1].trimmingCharacters(in: .whitespacesAndNewlines),
-                                  AID: components[2].trimmingCharacters(in: .whitespacesAndNewlines),
-                                  name: components[3].trimmingCharacters(in: .whitespacesAndNewlines))
+            return AbhyasiDetails(
+                RID: components[0].trimmingCharacters(in: .whitespacesAndNewlines),
+                batch: components[1].trimmingCharacters(in: .whitespacesAndNewlines),
+                AID: components[2].trimmingCharacters(in: .whitespacesAndNewlines),
+                name: components[3].trimmingCharacters(in: .whitespacesAndNewlines),
+                typedInfo: nil // Initialize typedInfo as nil
+            )
         }
-
-        // Reload the table view to reflect the changes
-        tableView.reloadData()
     }
+
+
+
+      
     
     // MARK: - UITableViewDataSource
 
@@ -291,23 +307,44 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return UITableView.automaticDimension
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            let details = abhyasiDetailsArray[indexPath.row]
-
-            // Set numberOfLines to 0 to allow multiline text
-            cell.textLabel?.numberOfLines = 0
-
-            cell.textLabel?.text = """
-                Name: \(details.name)
-                Batch: \(details.batch)
-                AID: \(details.AID)
-                RID: \(details.RID)
-            """
-
-            return cell
-        }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
+        let details = abhyasiDetailsArray[indexPath.row]
+
+        // Display information in the text label
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = """
+            Name: \(details.name)
+            Batch: \(details.batch)
+            AID: \(details.AID)
+            RID: \(details.RID)
+        """
+
+        // Check if the cell already contains a UITextField
+        var textField: UITextField!
+        if let existingTextField = cell.contentView.subviews.first(where: { $0 is UITextField }) as? UITextField {
+            textField = existingTextField
+        } else {
+            // If not, create a new UITextField
+            textField = UITextField()
+            textField.placeholder = "Type here..."
+            cell.contentView.addSubview(textField)
+
+
+            // Set tag and addTarget for the UITextField
+            textField.tag = indexPath.row
+            textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        }
+
+        // Set the text and delegate for the UITextField
+        textField.text = details.typedInfo
+        textField.delegate = self
+
+        return cell
+    }
+
+
     
     // Handle cell selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -368,25 +405,49 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         updateTitle()
     }
 
-    private func setupSubTitle() {
-        view.addSubview(subTitleLabel)
-
-        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-
-        updateSubTitle()
-    }
-
     private func updateTitle() {
         titleLabel.text = "\(titleText ?? "N/A")"
     }
 
-    private func updateSubTitle() {
-        subTitleLabel.text = "\(subTitleText ?? "N/A")"
+    private func updatePNR() {
+        pnrLabel.text = "\(pnrText ?? "N/A")"
     }
+    
+    func textField(_ textField: UITextField, didChangeCharactersIn range: NSRange, replacementString string: String) {
+        // Handle text changes here
+        let rowIndex = textField.tag
+        guard rowIndex != NSNotFound, rowIndex < abhyasiDetailsArray.count else {
+            return
+        }
+
+        var details = abhyasiDetailsArray[rowIndex]
+        details.typedInfo = textField.text
+    }
+
+
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+            guard let cell = textField.superview?.superview as? CustomTableViewCell,
+                  let indexPath = tableView.indexPath(for: cell),
+                  indexPath.row < abhyasiDetailsArray.count else {
+                return
+            }
+
+            // Update the typed information in the data source array
+            abhyasiDetailsArray[indexPath.row].typedInfo = textField.text
+        }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        let rowIndex = textField.tag
+        guard rowIndex != NSNotFound, rowIndex < abhyasiDetailsArray.count else {
+            return
+        }
+
+        var details = abhyasiDetailsArray[rowIndex]
+        details.typedInfo = textField.text
+
+    }
+    
+
 }
 

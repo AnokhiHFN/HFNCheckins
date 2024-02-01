@@ -12,4 +12,6 @@ struct AbhyasiDetails {
     var batch: String
     var AID: String
     var name: String
+   // var PNR: String
+    var typedInfo: String? // Add this property
 }

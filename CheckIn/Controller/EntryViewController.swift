@@ -191,13 +191,12 @@ BatchSelectionDelegate{
     }
     
     // Function to handle the "Scan" button tap
+    // Function to handle the "Scan" button tap
     @objc func scanAction() {
-        // Create an instance of the ScannerViewController
-        let scannerVC = QRScannerViewController()
-        //present(scannerVC, animated: true, completion: nil)
+        // Perform the segue with the specified identifier
         performSegue(withIdentifier: "EntryToScanner", sender: self)
-
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? DormViewController {
             // Set the delegate and dormViewController properties
@@ -218,10 +217,11 @@ BatchSelectionDelegate{
             }
         }
         if segue.identifier == "EntryToScanner" {
-                if let scannerViewController = segue.destination as? QRScannerViewController {
-                    scannerViewController.selectedBatch = getSelectedBatch() // Assuming selectedBatch is a property in QRScannerViewController
-                }
+            if let scannerVC = segue.destination as? QRScannerViewController {
+                // Pass the selectedEventTitle to the QRScannerViewController
+                scannerVC.selectedEventTitle = selectedEventTitle
             }
+        }
     }
 
     // MARK: - DormViewControllerDelegate method
