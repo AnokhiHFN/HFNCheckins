@@ -41,7 +41,6 @@ struct SwiftUIView: View {
     @State private var dorm = ""
     @State private var isCheckinButtonEnabled = false // Added state for button
     @State private var dormAndBertAllocation = ""
-    @State private var timestamp = ""
 
     
     var mobilePlaceholder: String {
@@ -188,7 +187,7 @@ struct SwiftUIView: View {
                                     city: city,
                                     state: state,
                                     country: country,
-                                    timestamp: DateUtility.getCurrentTimestampAsString(),
+                                    timestamp: DateUtility.getCurrentTimestamp(),
                                     dormAndBerthAllocation: dorm
                                 )
                                 delegate?.checkinButtonPressed(with: checkInData)

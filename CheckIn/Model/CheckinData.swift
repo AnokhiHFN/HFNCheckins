@@ -12,7 +12,7 @@ struct CheckInData: Codable {
     var state: String // correct
     var country: String // correct
     var type = "MOBILE_OR_EMAIL" // correct
-    var timestamp: String // correct
+    var timestamp: Int64 // correct
     var dormAndBerthAllocation: String? // also in QR
     var event = "68th Birthday Celebration of Pujya Daaji Maharaj" // correct
     

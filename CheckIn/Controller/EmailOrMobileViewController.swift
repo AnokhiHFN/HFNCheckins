@@ -72,9 +72,6 @@ class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
         do {
             var data = try checkInData.asDictionary()
 
-            // Remove nil values to avoid Firestore issues with optional fields
-            data = data.filter { $0.value as? String != nil }
-
             // Show loading indicator or any visual feedback here
 
             // Write data to local cache first
