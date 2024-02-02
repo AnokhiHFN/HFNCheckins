@@ -73,6 +73,7 @@ struct CheckInDataQR: Codable {
     var regId: String?
     var timestamp: Int64
     var type = "QR" // correct
+    var batch: String
     
     
     func asDictionary() throws -> [String: Any] {

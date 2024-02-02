@@ -192,7 +192,8 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 orderId: titleText!,
                 pnr: pnr,
                 regId: details.RID,
-                timestamp: DateUtility.getCurrentTimestamp() // Set timestamp as needed
+                timestamp: DateUtility.getCurrentTimestamp(), // Set timestamp as needed
+                batch: details.batch
             )
 
             writeCheckinData(checkInDataQR)
