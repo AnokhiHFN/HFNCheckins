@@ -25,6 +25,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     var selectedBatch: String?
     //var abhyasiID: String?
     var abhyasiID: String?
+    var event: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,7 +172,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     // Function to handle the "CheckIn" button tap
     @objc func checkInAction() {
         // Handle the action when the "CheckIn" button is tapped
-        guard let abhyasiID = abhyasiID, let selectedBatch = selectedBatch else {
+        guard let abhyasiID = abhyasiID, let selectedBatch = selectedBatch, let event = event else {
             return
         }
         
@@ -181,6 +182,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
             abhyasiId: abhyasiID,
             batch: selectedBatch,
             dormAndBerthAllocation: dormAndBerthAllocation,
+            eventName: event,
             timestamp: DateUtility.getCurrentTimestamp()// Make sure timestamp is defined and set appropriately
         )
 

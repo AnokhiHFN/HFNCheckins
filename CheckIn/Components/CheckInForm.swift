@@ -29,6 +29,7 @@ struct SwiftUIView: View {
     
     @Environment(\.presentationMode) var presentationMode
     weak var delegate: CheckInFormDelegate?
+    @Binding var event: String // Use Binding
     @Binding var batch: String // Use Binding
     @Binding var email: String // Use Binding
     @Binding var mobile: String // Use Binding
@@ -178,6 +179,7 @@ struct SwiftUIView: View {
                             .cornerRadius(10)
                             .onTapGesture {
                                 let checkInData = CheckInData(
+                                    event: event,
                                     batch: batch,
                                     fullName: fullName,
                                     mobile: mobile,

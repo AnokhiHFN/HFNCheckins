@@ -204,10 +204,12 @@ BatchSelectionDelegate{
             dormViewController = destinationVC
             destinationVC.selectedBatch = getSelectedBatch()
             destinationVC.abhyasiID = abhayasiID
+            destinationVC.event = selectedEventTitle
         }
         if let destinationVC = segue.destination as? EmailOrMobileViewController,
            segue.identifier == "CheckInSegue" {
             destinationVC.selectedBatch = getSelectedBatch()
+            destinationVC.givenTitle = selectedEventTitle
             if (email != nil) {
                 destinationVC.givenEmail = email
             }
