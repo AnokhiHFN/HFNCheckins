@@ -181,7 +181,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
             abhyasiId: abhyasiID,
             batch: selectedBatch,
             dormAndBerthAllocation: dormAndBerthAllocation,
-            timestamp: "" // Make sure timestamp is defined and set appropriately
+            timestamp: DateUtility.getCurrentTimestamp()// Make sure timestamp is defined and set appropriately
         )
 
         writeCheckinData(checkInData)

@@ -188,7 +188,7 @@ struct SwiftUIView: View {
                                     city: city,
                                     state: state,
                                     country: country,
-                                    timestamp: timestamp,
+                                    timestamp: DateUtility.getCurrentTimestampAsString(),
                                     dormAndBerthAllocation: dorm
                                 )
                                 delegate?.checkinButtonPressed(with: checkInData)

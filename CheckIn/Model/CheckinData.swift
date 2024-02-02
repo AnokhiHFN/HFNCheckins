@@ -44,7 +44,7 @@ struct CheckInDataID: Codable {
     var batch: String // correct
     var dormAndBerthAllocation: String? // correct
     var eventName = "68th Birthday Celebration of Pujya Daaji Maharaj"
-    var timestamp: String // correct
+    var timestamp: Int64 // correct
     var type = "ABHYASI_ID" // correct
     
     
@@ -71,7 +71,7 @@ struct CheckInDataQR: Codable {
     var orderId = "68th Birthday Celebration of Pujya Daaji Maharaj"
     var pnr: String?
     var regId: String?
-    var timestamp: String
+    var timestamp: Int64
     var type = "QR" // correct
     
     

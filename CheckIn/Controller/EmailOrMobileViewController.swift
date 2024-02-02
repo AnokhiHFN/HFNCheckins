@@ -11,7 +11,7 @@ protocol EmailOrMobileViewControllerDelegate: AnyObject {
 class EmailOrMobileViewController: UIViewController, CheckInFormDelegate {
     
     weak var delegate: EmailOrMobileViewControllerDelegate?
-    var checkInType : String = "None"
+    //var checkInType : String = "None"
     var selectedBatch: String? {
         didSet {
             // Update batch when selectedBatch changes

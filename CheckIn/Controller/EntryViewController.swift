@@ -203,6 +203,8 @@ BatchSelectionDelegate{
             destinationVC.delegate = self
             dormViewController = destinationVC
             destinationVC.selectedBatch = getSelectedBatch()
+            print(destinationVC.selectedBatch)
+            print("****************")
             destinationVC.abhyasiID = abhayasiID
         }
         if let destinationVC = segue.destination as? EmailOrMobileViewController,
