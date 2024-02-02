@@ -203,8 +203,6 @@ BatchSelectionDelegate{
             destinationVC.delegate = self
             dormViewController = destinationVC
             destinationVC.selectedBatch = getSelectedBatch()
-            print(destinationVC.selectedBatch)
-            print("****************")
             destinationVC.abhyasiID = abhayasiID
         }
         if let destinationVC = segue.destination as? EmailOrMobileViewController,
@@ -221,6 +219,7 @@ BatchSelectionDelegate{
             if let scannerVC = segue.destination as? QRScannerViewController {
                 // Pass the selectedEventTitle to the QRScannerViewController
                 scannerVC.selectedEventTitle = selectedEventTitle
+                scannerVC.selectedBatch = getSelectedBatch()
             }
         }
     }

@@ -22,7 +22,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     let infoTextField = UITextField()
     // Property to store the selected batch value
     //var selectedBatch: String?
-    var selectedBatch: String? = "hello"
+    var selectedBatch: String?
     //var abhyasiID: String?
     var abhyasiID: String?
     

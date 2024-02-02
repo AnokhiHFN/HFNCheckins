@@ -129,6 +129,9 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                 // Pass the scanned code to DormViewController
                 dormViewController.abhyasiID = self.dormViewController.abhyasiID
                 dormViewController.selectedBatch = selectedBatch
+                print("we are here")
+                print(selectedBatch)
+                print(dormViewController.selectedBatch)
             }
         }
         if segue.identifier == "ScannerToQR" {
