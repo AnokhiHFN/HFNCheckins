@@ -101,9 +101,6 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         backgroundImage.image = UIImage(named: "Background") // Replace "Background" with your background image name
         backgroundImage.contentMode = .scaleAspectFill
         view.addSubview(backgroundImage)
-        print("**************")
-        print(abhyasis)
-        print("***************")
         setupUI()
         
         // Add Cancel button
@@ -149,14 +146,12 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "QRToFinal" {
-            print("we will be going to the final screen now")
         }
     }
     
     // Handle Cancel button tap
     @objc func cancelButtonTapped() {
         // Implement Cancel button action
-        print("Cancel button tapped")
 
         if let entryViewController = navigationController?.viewControllers.first(where: { $0 is EntryViewController }) {
             navigationController?.popToViewController(entryViewController, animated: true)
@@ -171,9 +166,7 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Handle Check In button tap
     @objc func checkInButtonTapped() {
         // Implement Check In button action
-        print("Check In button tapped")
 
-        // Print details of selected cells
         var selectedAbhyasiDetails: [AbhyasiDetails] = []
 
         if let selectedRows = tableView.indexPathsForSelectedRows {
@@ -182,12 +175,10 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 selectedAbhyasiDetails.append(details)
             }
         } else {
-            print("No cells selected.")
         }
 
         // Check if there are selected Abhyasi details
         guard !selectedAbhyasiDetails.isEmpty else {
-            print("No Abhyasi details selected.")
             return
         }
 
@@ -201,7 +192,8 @@ class QRViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 orderId: titleText!,
                 pnr: pnr,
                 regId: details.RID,
-                timestamp: "" // Set timestamp as needed
+                timestamp: DateUtility.getCurrentTimestamp(), // Set timestamp as needed
+                batch: details.batch
             )
 
             writeCheckinData(checkInDataQR)

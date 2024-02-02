@@ -29,6 +29,7 @@ struct SwiftUIView: View {
     
     @Environment(\.presentationMode) var presentationMode
     weak var delegate: CheckInFormDelegate?
+    @Binding var event: String // Use Binding
     @Binding var batch: String // Use Binding
     @Binding var email: String // Use Binding
     @Binding var mobile: String // Use Binding
@@ -41,7 +42,6 @@ struct SwiftUIView: View {
     @State private var dorm = ""
     @State private var isCheckinButtonEnabled = false // Added state for button
     @State private var dormAndBertAllocation = ""
-    @State private var timestamp = ""
 
     
     var mobilePlaceholder: String {
@@ -179,6 +179,7 @@ struct SwiftUIView: View {
                             .cornerRadius(10)
                             .onTapGesture {
                                 let checkInData = CheckInData(
+                                    event: event,
                                     batch: batch,
                                     fullName: fullName,
                                     mobile: mobile,
@@ -188,7 +189,7 @@ struct SwiftUIView: View {
                                     city: city,
                                     state: state,
                                     country: country,
-                                    timestamp: timestamp,
+                                    timestamp: DateUtility.getCurrentTimestamp(),
                                     dormAndBerthAllocation: dorm
                                 )
                                 delegate?.checkinButtonPressed(with: checkInData)
@@ -256,8 +257,6 @@ struct SwiftUIView: View {
     } // SwiftUIView
     
     private func updateCheckinButtonState() {
-        print("update Checking Button State")
-        print("gender is nil? \(gender)")
         // Handle "0" as a special case
         let isValidAgeGroup = ageGroup != nil && ageGroup != "0"
         isCheckinButtonEnabled = !batch.isEmpty &&
@@ -267,6 +266,5 @@ struct SwiftUIView: View {
                                 !city.isEmpty &&
                                 !state.isEmpty &&
                                 !country.isEmpty
-        print("isCheckinButtonEnabled: \(isCheckinButtonEnabled)")
     }
 }

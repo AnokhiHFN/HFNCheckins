@@ -43,7 +43,6 @@ class ContainerViewController: UIViewController {
 
         eventsCollection.getDocuments { (snapshot, error) in
             if let error = error {
-                print("Error getting documents: \(error)")
                 completion([]) // Pass an empty array in case of error
             } else {
                 if let snapshot = snapshot {
@@ -55,7 +54,6 @@ class ContainerViewController: UIViewController {
                     }
                     completion(titles)
                 } else {
-                    print("Snapshot is nil")
                     completion([]) // Pass an empty array if snapshot is nil
                 }
             }

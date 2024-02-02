@@ -22,9 +22,10 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     let infoTextField = UITextField()
     // Property to store the selected batch value
     //var selectedBatch: String?
-    var selectedBatch: String? = "hello"
+    var selectedBatch: String?
     //var abhyasiID: String?
     var abhyasiID: String?
+    var event: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,7 +148,6 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text, let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            print("Updated text in infoTextField: \(updatedText)")
             // You can use the updatedText as needed.
         }
         return true
@@ -157,7 +157,6 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         // Access the entered text using textField.text
         if let enteredText = textField.text {
-            print("Entered text from infoTextField: \(enteredText)")
             // You can use the enteredText as needed, e.g., store it in a variable or send it to another function.
         }
     }
@@ -165,7 +164,6 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     // Function to handle the "Cancel" button tap
     @objc func cancelAction() {
         // Dismiss the current view controller and return to the previous screen
-        print("hellooooo")
         self.navigationController?.popViewController(animated: true)
 
         
@@ -174,8 +172,7 @@ class DormViewController: UIViewController, UITextFieldDelegate {
     // Function to handle the "CheckIn" button tap
     @objc func checkInAction() {
         // Handle the action when the "CheckIn" button is tapped
-        guard let abhyasiID = abhyasiID, let selectedBatch = selectedBatch else {
-            print("Missing required data for check-in")
+        guard let abhyasiID = abhyasiID, let selectedBatch = selectedBatch, let event = event else {
             return
         }
         
@@ -185,7 +182,8 @@ class DormViewController: UIViewController, UITextFieldDelegate {
             abhyasiId: abhyasiID,
             batch: selectedBatch,
             dormAndBerthAllocation: dormAndBerthAllocation,
-            timestamp: "" // Make sure timestamp is defined and set appropriately
+            eventName: event,
+            timestamp: DateUtility.getCurrentTimestamp()// Make sure timestamp is defined and set appropriately
         )
 
         writeCheckinData(checkInData)
