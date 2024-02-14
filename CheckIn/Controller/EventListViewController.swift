@@ -9,6 +9,9 @@ import UIKit
 
 class EventListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    private var refreshControl = UIRefreshControl()
+
+    
     var eventTitles: [String]?
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -55,8 +58,25 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
              tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20), // Adjust the right padding
              tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100) // Adjust the bottom padding
          ])
+        
+        // Add refresh control to table view
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
 
     }
+    
+    @objc private func refreshData(_ sender: Any) {
+        // Call your fetchEvents method to fetch new data
+        fetchEvents { [weak self] eventTitles in
+            // Update UI with new data
+            DispatchQueue.main.async {
+                self?.eventTitles = eventTitles
+                self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
+            }
+        }
+    }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
