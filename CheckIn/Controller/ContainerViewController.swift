@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class ContainerViewController: UIViewController {
 
@@ -39,27 +40,43 @@ class ContainerViewController: UIViewController {
 
     // Add the fetchEvents function here
     func fetchEvents(completion: @escaping ([String]) -> Void) {
-        let eventsCollection = Firestore.firestore().collection("ongoing-events")
-
-        eventsCollection.getDocuments { (snapshot, error) in
-            if let error = error {
-                completion([]) // Pass an empty array in case of error
-            } else {
-                if let snapshot = snapshot {
-                    var titles: [String] = []
-                    for document in snapshot.documents {
-                        if let title = document["title"] as? String {
-                            titles.append(title)
-                        }
-                    }
-                    completion(titles)
+        // Check if a user is currently signed in
+        if let currentUser = Auth.auth().currentUser {
+            fetchEventsFromFirestore(completion: completion)
+        } else {
+            // If no user is signed in, sign in anonymously
+            Auth.auth().signInAnonymously { [self] (authResult, error) in
+                if let error = error {
+                    print("Error signing in anonymously: \(error.localizedDescription)")
+                    completion([]) // Pass an empty array in case of error
                 } else {
-                    completion([]) // Pass an empty array if snapshot is nil
+                    // If sign-in succeeds, fetch events from Firestore
+                    fetchEventsFromFirestore(completion: completion)
                 }
             }
         }
     }
 
+    func fetchEventsFromFirestore(completion: @escaping ([String]) -> Void) {
+        let eventsCollection = Firestore.firestore().collection("ongoing-events")
+        
+        eventsCollection.getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching events: \(error.localizedDescription)")
+                completion([]) // Pass an empty array in case of error
+            } else {
+                var titles: [String] = []
+                if let snapshot = snapshot {
+                    for document in snapshot.documents {
+                        if let title = document["title"] as? String {
+                            titles.append(title)
+                        }
+                    }
+                }
+                completion(titles)
+            }
+        }
+    }
 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
