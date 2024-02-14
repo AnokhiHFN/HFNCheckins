@@ -25,6 +25,7 @@
 		FC6408672B6C0E61004A6938 /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6408662B6C0E61004A6938 /* DateUtility.swift */; };
 		FC69CCCA2B07CF8900CA1AC2 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC69CCC92B07CF8900CA1AC2 /* QRViewController.swift */; };
 		FC6B83602B6B9B7200CFD652 /* CustomTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6B835F2B6B9B7200CFD652 /* CustomTable.swift */; };
+		FC9152D62B7CDFBC00BBD168 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9152D52B7CDFBC00BBD168 /* FetchData.swift */; };
 		FCA7CFF22ACB07C9006C93E3 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */; };
 		FCA7CFF72ACC597F006C93E3 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */; };
 		FCA7CFFF2ACDB4A5006C93E3 /* DormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */; };
@@ -56,6 +57,7 @@
 		FC6408662B6C0E61004A6938 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
 		FC69CCC92B07CF8900CA1AC2 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		FC6B835F2B6B9B7200CFD652 /* CustomTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTable.swift; sourceTree = "<group>"; };
+		FC9152D52B7CDFBC00BBD168 /* FetchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData.swift; sourceTree = SOURCE_ROOT; };
 		FCA7CFF12ACB07C9006C93E3 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FCA7CFF62ACC597F006C93E3 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		FCA7CFFE2ACDB4A5006C93E3 /* DormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DormViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		FC3147082AB4B68100A27646 /* CheckIn */ = {
 			isa = PBXGroup;
 			children = (
+				FC9152D42B7CDFAD00BBD168 /* Utility */,
 				FCA7D0182ADC2767006C93E3 /* GoogleService-Info.plist */,
 				FCA7CFF52ACC55A5006C93E3 /* Components */,
 				FC31471D2AB82FA700A27646 /* Model */,
@@ -159,6 +162,14 @@
 				FC5D0DDC2B62424D00C37ED6 /* ContainerViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		FC9152D42B7CDFAD00BBD168 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				FC9152D52B7CDFBC00BBD168 /* FetchData.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		FCA7CFF52ACC55A5006C93E3 /* Components */ = {
@@ -292,6 +303,7 @@
 			files = (
 				FCA7CFFF2ACDB4A5006C93E3 /* DormViewController.swift in Sources */,
 				FCA7CFF22ACB07C9006C93E3 /* EntryViewController.swift in Sources */,
+				FC9152D62B7CDFBC00BBD168 /* FetchData.swift in Sources */,
 				FC3147432ABF199A00A27646 /* AbhyasiManager.swift in Sources */,
 				FC31470A2AB4B68100A27646 /* AppDelegate.swift in Sources */,
 				FC3147532AC6099300A27646 /* FinalScreenViewController.swift in Sources */,
@@ -456,7 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6WMUF23BB8;
+				DEVELOPMENT_TEAM = SVAZWU6ZYJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheckIn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -486,7 +498,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6WMUF23BB8;
+				DEVELOPMENT_TEAM = SVAZWU6ZYJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheckIn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
